@@ -1,0 +1,118 @@
+
+            GROUP for Windows, Version 2022.12.7   
+
+     -------------------------------------------------------------------------
+                          Time and Date of Analysis
+     -------------------------------------------------------------------------
+
+               Date:  June 03, 2025     Time:  12:29:08
+
+            VA: Holland Road Weir Gate - Pinned                                             
+
+
+     READING * TITLE AND VERSION
+     READING * Analysis Parameters                                                           
+     READING * Pile Cap Dimensions                                                           
+     READING * Load Cases                                                                    
+     READING * Load Combinations                                                             
+     READING * Distributed Load Sets                                                         
+     READING * Soil Movement Sets                                                            
+     READING * Pile Group Configuration                                                      
+     READING * Pile Properties                                                               
+     READING * Pile Cross Sections                                                           
+     READING * Soil Layers                                                                   
+     READING * Generated LD curves                                                           
+     READING * Generated TR curves                                                           
+     READING * User defined MC curves                                                        
+     READING * Internally Generated MC curves                                                
+     READING * Internally Generated Elasto-Plastic curves                                    
+     READING * Sets Data                                                                     
+     READING * End of file                                                                   
+
+
+
+     COMPUTATION IS PROCEEDING......
+
+
+
+     LOAD CASE :     1
+     CASE NAME : Unfactored-Usual                                                                
+
+     GLOBAL ITERATIONS
+ 
+     STEP     1, TCUR     1.0000, DTCUR     1.0000
+     ITERATION    1
+                   - ErrDsp   1.00000E+00, IncDsp   1.87700E-02, TotDsp   1.87700E-02
+                   - ErrRot   1.00000E+00, IncRot   2.40605E-04, TotRot   2.40605E-04
+     ITERATION    2
+                   - ErrDsp   4.02471E-01, IncDsp   9.01714E-03, TotDsp   2.24044E-02
+                   - ErrRot   1.46522E-01, IncRot   4.13062E-05, TotRot   2.81911E-04
+     ITERATION    3
+                   - ErrDsp   9.62859E-01, IncDsp   2.50200E-01, TotDsp   2.59851E-01
+                   - ErrRot   1.88121E-08, IncRot   5.30333E-12, TotRot   2.81911E-04
+     ITERATION    4
+                   - ErrDsp   5.26791E-01, IncDsp   2.88796E-01, TotDsp   5.48216E-01
+                   - ErrRot   6.04783E-07, IncRot   1.70495E-10, TotRot   2.81911E-04
+     ITERATION    5
+                   - ErrDsp   1.45237E-01, IncDsp   9.31402E-02, TotDsp   6.41300E-01
+                   - ErrRot   1.06983E-06, IncRot   3.01598E-10, TotRot   2.81911E-04
+     ITERATION    6
+                   - ErrDsp   4.89904E-03, IncDsp   3.15721E-03, TotDsp   6.44456E-01
+                   - ErrRot   4.98467E-07, IncRot   1.40523E-10, TotRot   2.81911E-04
+     ITERATION    7
+                   - ErrDsp   1.18011E-06, IncDsp   7.60529E-07, TotDsp   6.44457E-01
+                   - ErrRot   4.14779E-08, IncRot   1.16931E-11, TotRot   2.81911E-04
+
+          NUMBER OF GLOBAL ITERATIONS =    7
+
+     ANALYSIS FOR LOAD CASE   1/  2 FINISHED
+
+     Execution Time    :  724 ms
+     Number Processors : 15/20
+     Serial processing :     0.674 sec
+     Paral. processing :     0.036 sec
+     Print. processing :     0.015 sec
+
+
+
+     LOAD CASE :     2
+     CASE NAME : Unfactored-Unusual                                                              
+
+     GLOBAL ITERATIONS
+ 
+     STEP     1, TCUR     1.0000, DTCUR     1.0000
+     ITERATION    1
+                   - ErrDsp   1.00000E+00, IncDsp   1.70344E-02, TotDsp   1.70344E-02
+                   - ErrRot   1.00000E+00, IncRot   1.87557E-04, TotRot   1.87557E-04
+     ITERATION    2
+                   - ErrDsp   4.41805E-01, IncDsp   9.04494E-03, TotDsp   2.04727E-02
+                   - ErrRot   1.44772E-01, IncRot   3.17495E-05, TotRot   2.19307E-04
+     ITERATION    3
+                   - ErrDsp   9.63354E-01, IncDsp   2.52105E-01, TotDsp   2.61695E-01
+                   - ErrRot   7.37244E-09, IncRot   1.61683E-12, TotRot   2.19307E-04
+     ITERATION    4
+                   - ErrDsp   5.28054E-01, IncDsp   2.92424E-01, TotDsp   5.53776E-01
+                   - ErrRot   2.02889E-06, IncRot   4.44950E-10, TotRot   2.19307E-04
+     ITERATION    5
+                   - ErrDsp   1.45458E-01, IncDsp   9.42549E-02, TotDsp   6.47987E-01
+                   - ErrRot   4.17649E-06, IncRot   9.15932E-10, TotRot   2.19307E-04
+     ITERATION    6
+                   - ErrDsp   4.92177E-03, IncDsp   3.20501E-03, TotDsp   6.51190E-01
+                   - ErrRot   2.21439E-06, IncRot   4.85630E-10, TotRot   2.19307E-04
+     ITERATION    7
+                   - ErrDsp   2.73928E-06, IncDsp   1.78380E-06, TotDsp   6.51192E-01
+                   - ErrRot   7.15522E-08, IncRot   1.56919E-11, TotRot   2.19307E-04
+
+          NUMBER OF GLOBAL ITERATIONS =    7
+
+     ANALYSIS FOR LOAD CASE   2/  2 FINISHED
+
+     Execution Time    :   87 ms
+     Number Processors : 15/20
+     Serial processing :     0.049 sec
+     Paral. processing :     0.022 sec
+     Print. processing :     0.016 sec
+     
+     ANALYSIS COMPLETED
+     Execution Time    :  812 ms
+     Number Processors : 15/20

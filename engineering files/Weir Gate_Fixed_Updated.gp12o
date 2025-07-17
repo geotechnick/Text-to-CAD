@@ -1,0 +1,156 @@
+     =========================================================================
+
+                      GROUP for Windows, Version 2022.12.7   
+
+                       Serial Number : 185078092   
+
+                       Analysis of A Group of Piles 
+                    Subjected to Axial and Lateral Loading 
+
+                     (c) Copyright ENSOFT, Inc., 1987-2022   
+                           All Rights Reserved               
+
+     =========================================================================
+
+
+     This program is licensed to : 
+
+     ARCADIS U.S. Inc.
+     Chattanooga, TN
+
+     Path to file locations      : C:\Users\floresa6202\ARCADIS\30208174 - Princess Anne Drainage Improvements PDB - 03 Geotechnical\Working Files\60%\SP7 Holland Road\GROUP\GROUP Files\
+     Name of input data file     : VA_Holland Rode Weir Gate_Fixed_Updated.gp12d
+     Name of output echo file    : VA_Holland Rode Weir Gate_Fixed_Updated.gp12e
+     Name of output results file : VA_Holland Rode Weir Gate_Fixed_Updated.gp12o
+     Name of output summary file : VA_Holland Rode Weir Gate_Fixed_Updated.gp12t
+     Name of plot output file    : VA_Holland Rode Weir Gate_Fixed_Updated.gp12p
+     Name of runtime file        : VA_Holland Rode Weir Gate_Fixed_Updated.gp12r
+ 
+ 
+     -------------------------------------------------------------------------
+                          Time and Date of Analysis
+     -------------------------------------------------------------------------
+
+               Date:  June 03, 2025     Time:  12:36:40
+
+
+
+
+                 *****     COMPUTATION RESULTS     *****
+
+
+
+     VA: Holland Road Weir Gate - Pinned                                             
+
+
+
+
+                 *****     LOAD CASES RESULTS      *****
+
+
+
+     LOAD CASE :     1
+     CASE NAME : Unfactored-Usual                                                                
+     LOAD TYPE : Special, Sp                     
+
+       REDUCTION FACTORS FOR CLOSELY-SPACED PILE GROUPS, COMBINED Y AND Z DIRECTIONS
+       ESTIMATED USING MOVEMENT IN THE DIRECTION OF PILE CAP DISPLACEMENTS
+                                        
+            GROUP NO     P-FACTOR     Y-FACTOR        
+
+                1           0.7867       1.0000 
+                2           0.7791       1.0000 
+                3           0.7791       1.0000 
+                4           0.7791       1.0000 
+                5           0.7867       1.0000 
+                6           0.7773       1.0000 
+                7           0.7698       1.0000 
+                8           0.7698       1.0000 
+                9           0.7698       1.0000 
+               10           0.7773       1.0000 
+               11           0.9881       1.0000 
+               12           0.9881       1.0000 
+               13           0.9881       1.0000 
+               14           0.9881       1.0000 
+               15           0.9881       1.0000 
+
+
+
+     * TABLE L *   COMPUTATION ON PILE CAP
+
+
+     * EQUIVALENT CONCENTRATED LOAD AT ORIGIN *
+
+
+           VERT. LOAD,KIPS    HOR. LOAD Y,KIPS   HOR. LOAD Z,KIPS
+                 382.211            0.00000           -113.318 
+
+          MOMENT X ,KIP-IN    MOMENT Y,KIP-IN    MOMENT Z,KIP-IN
+                 0.00000           -7525.50            0.00000 
+
+
+     * DISPLACEMENT OF GROUPED PILE FOUNDATION AT ORIGIN *
+
+
+            VERTICAL ,IN      HORIZONTAL Y,IN     HORIZONTAL Z,IN
+               0.0216104        1.13937E-14           -0.17630 
+
+          ANGLE ROT. X,RAD    ANGLE ROT. Y,RAD    ANGLE ROT. Z,RAD
+            -5.37669E-15       -5.25344E-04       -1.55749E-18 
+
+
+          NUMBER OF GLOBAL ITERATIONS =    6
+
+
+
+     LOAD CASE :     2
+     CASE NAME : Unfactored-Unusual                                                              
+     LOAD TYPE : Special, Sp                     
+
+       REDUCTION FACTORS FOR CLOSELY-SPACED PILE GROUPS, COMBINED Y AND Z DIRECTIONS
+       ESTIMATED USING MOVEMENT IN THE DIRECTION OF PILE CAP DISPLACEMENTS
+                                        
+            GROUP NO     P-FACTOR     Y-FACTOR        
+
+                1           0.7867       1.0000 
+                2           0.7791       1.0000 
+                3           0.7791       1.0000 
+                4           0.7791       1.0000 
+                5           0.7867       1.0000 
+                6           0.7773       1.0000 
+                7           0.7698       1.0000 
+                8           0.7698       1.0000 
+                9           0.7698       1.0000 
+               10           0.7773       1.0000 
+               11           0.9881       1.0000 
+               12           0.9881       1.0000 
+               13           0.9881       1.0000 
+               14           0.9881       1.0000 
+               15           0.9881       1.0000 
+
+
+
+     * TABLE L *   COMPUTATION ON PILE CAP
+
+
+     * EQUIVALENT CONCENTRATED LOAD AT ORIGIN *
+
+
+           VERT. LOAD,KIPS    HOR. LOAD Y,KIPS   HOR. LOAD Z,KIPS
+                 346.871            0.00000           -114.173 
+
+          MOMENT X ,KIP-IN    MOMENT Y,KIP-IN    MOMENT Z,KIP-IN
+                 0.00000           -5866.31            0.00000 
+
+
+     * DISPLACEMENT OF GROUPED PILE FOUNDATION AT ORIGIN *
+
+
+            VERTICAL ,IN      HORIZONTAL Y,IN     HORIZONTAL Z,IN
+               0.0188133        3.23101E-14           -0.17178 
+
+          ANGLE ROT. X,RAD    ANGLE ROT. Y,RAD    ANGLE ROT. Z,RAD
+            -1.51637E-14       -4.45208E-04       -3.79250E-18 
+
+
+          NUMBER OF GLOBAL ITERATIONS =    6

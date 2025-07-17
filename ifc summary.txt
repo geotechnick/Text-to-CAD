@@ -1,0 +1,329 @@
+# IFC File Structure Summary
+## Industry Foundation Classes (IFC) - Hierarchical Organization
+
+### OVERVIEW
+IFC files represent building and infrastructure information using a hierarchical, object-oriented data model. Each element has geometry, properties, and relationships to other elements.
+
+### IFC HIERARCHICAL STRUCTURE
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        IFC FILE STRUCTURE                       │
+└─────────────────────────────────────────────────────────────────┘
+
+ROOT LEVEL:
+├── IfcProject (Global project container)
+│   ├── Name: "Project Name"
+│   ├── Description: "Project Description"
+│   ├── GlobalId: Unique identifier
+│   └── OwnerHistory: Creation/modification info
+│
+├── IfcSite (Physical site/location)
+│   ├── Name: "Site Name"
+│   ├── RefLatitude/RefLongitude: Geographic coordinates
+│   ├── RefElevation: Site elevation
+│   └── LandTitleNumber: Legal information
+│
+├── IfcBuilding (Building or structure)
+│   ├── Name: "Building Name"
+│   ├── BuildingAddress: Physical address
+│   ├── ElevationOfRefHeight: Reference elevation
+│   └── ElevationOfTerrain: Ground level
+│
+├── IfcBuildingStorey (Floor/level)
+│   ├── Name: "Floor Name"
+│   ├── Elevation: Floor elevation
+│   └── CompositionType: ELEMENT/PARTIAL
+│
+└── IfcSpace (Spatial zones)
+    ├── Name: "Space Name"
+    ├── LongName: Full description
+    ├── CompositionType: ELEMENT
+    └── PredefinedType: SPACE/PARKING/etc.
+```
+
+### SPATIAL HIERARCHY DIAGRAM
+
+```
+IfcProject
+│
+├── IfcSite
+│   │
+│   ├── IfcBuilding
+│   │   │
+│   │   ├── IfcBuildingStorey
+│   │   │   │
+│   │   │   ├── IfcSpace
+│   │   │   ├── IfcSpace
+│   │   │   └── IfcSpace
+│   │   │
+│   │   ├── IfcBuildingStorey
+│   │   │   │
+│   │   │   ├── IfcSpace
+│   │   │   └── IfcSpace
+│   │   │
+│   │   └── IfcBuildingStorey
+│   │
+│   └── IfcBuilding (additional buildings)
+│
+└── IfcSite (additional sites)
+```
+
+### BUILDING ELEMENT HIERARCHY
+
+```
+STRUCTURAL ELEMENTS:
+├── IfcStructuralAnalysisModel
+│   ├── IfcStructuralLoadGroup
+│   ├── IfcStructuralResultGroup
+│   └── IfcStructuralLoadCase
+│
+├── IfcStructuralItem
+│   ├── IfcStructuralMember
+│   │   ├── IfcStructuralCurveMember (beams, columns)
+│   │   └── IfcStructuralSurfaceMember (slabs, walls)
+│   │
+│   └── IfcStructuralConnection
+│       ├── IfcStructuralPointConnection
+│       └── IfcStructuralSurfaceConnection
+│
+BUILDING ELEMENTS:
+├── IfcWall
+│   ├── IfcWallStandardCase
+│   ├── IfcWallElementedCase
+│   └── IfcCurtainWall
+│
+├── IfcBeam
+├── IfcColumn
+├── IfcSlab
+├── IfcFooting
+├── IfcPile
+├── IfcRamp
+├── IfcStair
+├── IfcRoof
+├── IfcDoor
+├── IfcWindow
+└── IfcBuildingElementProxy (custom elements)
+```
+
+### CIVIL ENGINEERING ELEMENTS
+
+```
+INFRASTRUCTURE ELEMENTS:
+├── IfcBridge
+│   ├── IfcBridgePart
+│   └── IfcBridgeElement
+│
+├── IfcRoad
+│   ├── IfcRoadPart
+│   └── IfcRoadElement
+│
+├── IfcRail
+│   ├── IfcRailPart
+│   └── IfcRailElement
+│
+├── IfcTunnel
+│   ├── IfcTunnelPart
+│   └── IfcTunnelElement
+│
+├── IfcMarineFacility
+│   ├── IfcMarinePart
+│   └── IfcMarineElement
+│
+└── IfcFacility (generic infrastructure)
+    ├── IfcFacilityPart
+    └── IfcFacilityElement
+```
+
+### GEOMETRIC REPRESENTATION
+
+```
+GEOMETRY HIERARCHY:
+├── IfcProductDefinitionShape
+│   └── IfcShapeRepresentation
+│       ├── RepresentationIdentifier: "Body", "Axis", "FootPrint"
+│       ├── RepresentationType: "SweptSolid", "Brep", "MappedRepresentation"
+│       └── Items: [IfcGeometricRepresentationItem]
+│
+GEOMETRIC ITEMS:
+├── IfcExtrudedAreaSolid (extrusions)
+├── IfcRevolvedAreaSolid (revolutions)
+├── IfcSweptAreaSolid (sweeps)
+├── IfcBooleanResult (boolean operations)
+├── IfcFacetedBrep (boundary representation)
+├── IfcManifoldSolidBrep (solid modeling)
+└── IfcMappedItem (instanced geometry)
+```
+
+### PROPERTY STRUCTURE
+
+```
+PROPERTY HIERARCHY:
+├── IfcPropertySet
+│   ├── Name: "Pset_WallCommon"
+│   ├── Description: "Common properties for walls"
+│   └── HasProperties: [IfcProperty]
+│       ├── IfcPropertySingleValue
+│       ├── IfcPropertyEnumeratedValue
+│       ├── IfcPropertyBoundedValue
+│       ├── IfcPropertyListValue
+│       └── IfcPropertyTableValue
+│
+├── IfcQuantitySet
+│   ├── Name: "Qto_WallBaseQuantities"
+│   ├── Description: "Base quantities for walls"
+│   └── Quantities: [IfcPhysicalQuantity]
+│       ├── IfcQuantityLength
+│       ├── IfcQuantityArea
+│       ├── IfcQuantityVolume
+│       ├── IfcQuantityCount
+│       └── IfcQuantityWeight
+│
+└── IfcMaterialDefinition
+    ├── IfcMaterial
+    ├── IfcMaterialLayer
+    ├── IfcMaterialLayerSet
+    ├── IfcMaterialProfile
+    └── IfcMaterialProfileSet
+```
+
+### RELATIONSHIP STRUCTURE
+
+```
+RELATIONSHIP TYPES:
+├── IfcRelAggregates (part-of relationships)
+│   ├── RelatingObject: Parent container
+│   └── RelatedObjects: Child elements
+│
+├── IfcRelContainedInSpatialStructure (spatial containment)
+│   ├── RelatingStructure: Spatial container
+│   └── RelatedElements: Contained elements
+│
+├── IfcRelDefinesByProperties (property assignment)
+│   ├── RelatedObjects: Elements with properties
+│   └── RelatingPropertyDefinition: Property sets
+│
+├── IfcRelAssociatesMaterial (material assignment)
+│   ├── RelatedObjects: Elements with materials
+│   └── RelatingMaterial: Material definition
+│
+├── IfcRelConnectsElements (element connections)
+│   ├── RelatingElement: Source element
+│   └── RelatedElement: Target element
+│
+└── IfcRelVoidsElement (openings/voids)
+    ├── RelatingBuildingElement: Host element
+    └── RelatedOpeningElement: Void/opening
+```
+
+### CIVIL ENGINEERING MAPPING
+
+```
+FLOOD CONTROL STRUCTURES:
+├── IfcWall → Floodwall/Retaining Wall
+│   ├── Properties: Height, Thickness, Material
+│   ├── Quantities: Volume, Surface Area
+│   └── Structural: LoadBearing, Design Loads
+│
+├── IfcFooting → Foundation Elements
+│   ├── Properties: Width, Depth, Reinforcement
+│   ├── Quantities: Concrete Volume, Steel Weight
+│   └── Structural: Bearing Capacity, Settlement
+│
+├── IfcPile → Micropiles
+│   ├── Properties: Diameter, Length, Material
+│   ├── Quantities: Count, Total Length
+│   └── Structural: Load Capacity, Factor of Safety
+│
+├── IfcBuildingElementProxy → Custom Elements
+│   ├── Weir Gates
+│   ├── Culverts
+│   ├── Drainage Structures
+│   └── Hydraulic Components
+│
+└── IfcStructuralAnalysisModel → Analysis Results
+    ├── LoadGroups: Dead, Live, Wind, Seismic
+    ├── LoadCases: Design combinations
+    └── Results: Forces, Moments, Deflections
+```
+
+### PROPERTY SETS FOR CIVIL ENGINEERING
+
+```
+CUSTOM PROPERTY SETS:
+├── Pset_FloodwallCommon
+│   ├── DesignFloodLevel: Water elevation
+│   ├── FloodProtectionLevel: Protection standard
+│   ├── SeepageControl: Drainage provisions
+│   └── WaveProtection: Wave height design
+│
+├── Pset_FoundationCommon
+│   ├── BearingCapacity: Allowable bearing pressure
+│   ├── SettlementLimit: Maximum settlement
+│   ├── GroundwaterLevel: Design water table
+│   └── SoilType: Geotechnical classification
+│
+├── Pset_MicropileCommon
+│   ├── WorkingLoad: Design load capacity
+│   ├── UltimateCapacity: Maximum load
+│   ├── InstallationMethod: Construction technique
+│   └── GroutStrength: Material properties
+│
+└── Pset_StructuralAnalysis
+    ├── AnalysisType: Static, Dynamic, Seismic
+    ├── LoadCombinations: Design combinations
+    ├── SafetyFactor: Factor of safety
+    └── CodeCompliance: Design standard reference
+```
+
+### FILE STRUCTURE EXAMPLE
+
+```
+TYPICAL IFC FILE ORGANIZATION:
+├── HEADER
+│   ├── FILE_DESCRIPTION
+│   ├── FILE_NAME
+│   └── FILE_SCHEMA
+│
+├── DATA SECTION
+│   ├── #1=IFCPROJECT(...)
+│   ├── #2=IFCSITE(...)
+│   ├── #3=IFCBUILDING(...)
+│   ├── #4=IFCBUILDINGSTOREY(...)
+│   ├── #5=IFCWALL(...)
+│   ├── #6=IFCPRODUCTDEFINITIONSHAPE(...)
+│   ├── #7=IFCSHAPEREPRESENTATION(...)
+│   ├── #8=IFCEXTRUDEDAREASOLID(...)
+│   ├── #9=IFCPROPERTYSET(...)
+│   ├── #10=IFCMATERIAL(...)
+│   ├── #11=IFCRELAGGREGATES(...)
+│   ├── #12=IFCRELCONTAINEDINSPATIALSTRUCTURE(...)
+│   ├── #13=IFCRELDEFINESBYPROPERTIES(...)
+│   └── #14=IFCRELASSOCIATESMATERIAL(...)
+│
+└── ENDSEC
+```
+
+### KEY CONCEPTS FOR AI GENERATION
+
+1. **Hierarchical Structure**: Always maintain proper spatial hierarchy
+2. **Global IDs**: Each object needs unique GUID
+3. **Relationships**: All connections must be explicitly defined
+4. **Properties**: Comprehensive property sets for engineering data
+5. **Geometry**: Multiple representation types for different uses
+6. **Materials**: Detailed material definitions with properties
+7. **Validation**: Schema compliance and engineering logic
+
+### CIVIL ENGINEERING PRIORITIES
+
+1. **Structural Elements**: Walls, footings, piles with load data
+2. **Spatial Organization**: Site, building, spaces for context
+3. **Material Properties**: Concrete, steel, soil characteristics
+4. **Analysis Integration**: Loads, stresses, safety factors
+5. **Code Compliance**: Property sets for regulatory requirements
+6. **Construction Data**: Quantities, specifications, methods
+
+---
+Document Version: 1.0
+Date: 2025-07-17
+Purpose: Guide for IFC generation from engineering files

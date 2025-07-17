@@ -1,0 +1,113 @@
+
+
+                 *****     LOAD CASES RESULTS      *****
+
+     LOAD CASE :     1
+
+     * TABLE L *   COMPUTATION ON PILE CAP
+
+     * EQUIVALENT CONCENTRATED LOAD AT ORIGIN *
+           LOAD X,KIP     LOAD Y,KIP     LOAD Z,KIP    MOM X,KIP-IN   MOM Y,KIP-IN   MOM Z,KIP-IN
+               382.211        0.00000       -113.318        0.00000       -7525.50        0.00000 
+
+     * DISPLACEMENT OF GROUPED PILE FOUNDATION AT ORIGIN *
+            DISP X,IN      DISP Y,IN      DISP Z,IN      ROT X,RAD      ROT Y,RAD      ROT Z,RAD
+             0.0216104    1.13937E-14       -0.17630   -5.37669E-15   -5.25344E-04   -1.55749E-18 
+
+       * PILE TOP DISPLACEMENTS, GLOBAL *
+                   DISP. X,IN   DISP. Y,IN   DISP. Z,IN   ROT. X,RAD   ROT. Y,RAD   ROT. Z,RAD
+                  ***********  ***********  ***********  ***********  ***********  ***********
+       MINIMUM    -3.6061E-03  -2.4669E-13      -0.1763  -5.3767E-15  -5.2534E-04  -1.5575E-18 
+       Pile N.          1           11            1            1            1            1
+       MAXIMUM       0.046827   2.6948E-13      -0.1763  -5.3767E-15  -5.2534E-04  -1.5575E-18 
+       Pile N.         11            1            1            1            1            1
+
+       * PILE TOP REACTIONS, GLOBAL *
+                   FOR. X,KIP   FOR. Y,KIP   FOR. Z,KIP MOM X,KIP-IN MOM Y,KIP-IN MOM Z,KIP-IN
+                  ***********  ***********  ***********  ***********  ***********  ***********
+       MINIMUM        -4.7882  -1.4747E-11      -8.2947  -1.2757E-10       408.48  -9.2612E-10 
+       Pile N.          1           11           11           11            7           11
+       MAXIMUM         53.104   1.4210E-11      -7.1202  -1.2756E-10       453.53   9.3186E-10 
+       Pile N.         11            1            7            1           11            1
+
+       * PILE TOP DISPLACEMENTS, LOCAL *
+                   DISP. x,IN   DISP. y,IN   DISP. z,IN   ROT. x,RAD   ROT. y,RAD   ROT. z,RAD
+                  ***********  ***********  ***********  ***********  ***********  ***********
+       MINIMUM    -3.6061E-03  -2.4669E-13      -0.1763  -5.3767E-15  -5.2534E-04  -1.5575E-18 
+       Pile N.          1           11            1            1            1            1
+       MAXIMUM       0.046827   2.6948E-13      -0.1763  -5.3767E-15  -5.2534E-04  -1.5575E-18 
+       Pile N.         11            1            1            1            1            1
+
+       * PILE TOP REACTIONS, LOCAL *
+                   AXIAL,KIP    LAT. y,KIP   LAT. z,KIP MOM x,KIP-IN MOM y,KIP-IN MOM z,KIP-IN
+                  ***********  ***********  ***********  ***********  ***********  ***********
+       MINIMUM        -4.7882  -1.4751E-11      -8.2947  -1.2754E-10       408.48  -9.2612E-10 
+       Pile N.          1           11           11            1            7           11
+       MAXIMUM         53.104   1.4210E-11      -7.1202  -1.2754E-10       453.53   9.3186E-10 
+       Pile N.         11            1            7            1           11            1
+
+       * EFFECTS FOR LATERALLY LOADED PILE *   
+ 
+     PILE     DISPL.      DISPL.      MOMENT      MOMENT       SHEAR       SHEAR    SOIL REACT  SOIL REACT     TOTAL    FLEX. RIG.  FLEX. RIG.  
+               y-DIR       z-DIR       z-DIR       y-DIR       y-DIR       z-DIR       y-DIR       z-DIR      STRESS       z-DIR       y-DIR    
+                IN          IN        KIP-IN      KIP-IN        KIP         KIP       KIP/IN      KIP/IN     KIP/IN**2   KIP-IN**2   KIP-IN**2  
+    ******  **********  **********  **********  **********  **********  **********  **********  **********  **********  **********  **********  
+      Min. -2.4669E-13     -0.1763 -9.3186E-10     -109.28 -1.4751E-11     -8.2947 -1.9697E-13     -0.1163    0.037503  4.2395E+06  3.1739E+06 
+   Pile N.      11           1           1          11          11          11          11          11           1           1          11       
+      Max.  2.6947E-13  5.2764E-03  9.2612E-10      453.53  1.4210E-11      1.4711  1.8264E-13    0.020750      0.5003  1.4883E+07  1.4883E+07 
+   Pile N.       1          11          11          11           1          11           1          11          11           1           1       
+
+     LOAD CASE :     2
+
+     * TABLE L *   COMPUTATION ON PILE CAP
+
+     * EQUIVALENT CONCENTRATED LOAD AT ORIGIN *
+           LOAD X,KIP     LOAD Y,KIP     LOAD Z,KIP    MOM X,KIP-IN   MOM Y,KIP-IN   MOM Z,KIP-IN
+               346.871        0.00000       -114.173        0.00000       -5866.31        0.00000 
+
+     * DISPLACEMENT OF GROUPED PILE FOUNDATION AT ORIGIN *
+            DISP X,IN      DISP Y,IN      DISP Z,IN      ROT X,RAD      ROT Y,RAD      ROT Z,RAD
+             0.0188133    3.23101E-14       -0.17178   -1.51637E-14   -4.45208E-04   -3.79250E-18 
+
+       * PILE TOP DISPLACEMENTS, GLOBAL *
+                   DISP. X,IN   DISP. Y,IN   DISP. Z,IN   ROT. X,RAD   ROT. Y,RAD   ROT. Z,RAD
+                  ***********  ***********  ***********  ***********  ***********  ***********
+       MINIMUM    -2.5567E-03  -6.9555E-13      -0.1718  -1.5164E-14  -4.4521E-04  -3.7925E-18 
+       Pile N.          1           11            1            1            1            1
+       MAXIMUM       0.040183   7.6017E-13      -0.1718  -1.5164E-14  -4.4521E-04  -3.7925E-18 
+       Pile N.         11            1            1            1            1            1
+
+       * PILE TOP REACTIONS, GLOBAL *
+                   FOR. X,KIP   FOR. Y,KIP   FOR. Z,KIP MOM X,KIP-IN MOM Y,KIP-IN MOM Z,KIP-IN
+                  ***********  ***********  ***********  ***********  ***********  ***********
+       MINIMUM        -3.3947  -4.1725E-11      -8.3521  -3.5971E-10       419.34  -2.6140E-09 
+       Pile N.          1           11           11           11            7           11
+       MAXIMUM         48.261   4.0185E-11      -7.1806  -3.5971E-10       464.24   2.6314E-09 
+       Pile N.         11            1            7            1           11            1
+
+       * PILE TOP DISPLACEMENTS, LOCAL *
+                   DISP. x,IN   DISP. y,IN   DISP. z,IN   ROT. x,RAD   ROT. y,RAD   ROT. z,RAD
+                  ***********  ***********  ***********  ***********  ***********  ***********
+       MINIMUM    -2.5567E-03  -6.9555E-13      -0.1718  -1.5164E-14  -4.4521E-04  -3.7925E-18 
+       Pile N.          1           11            1            1            1            1
+       MAXIMUM       0.040183   7.6017E-13      -0.1718  -1.5164E-14  -4.4521E-04  -3.7925E-18 
+       Pile N.         11            1            1            1            1            1
+
+       * PILE TOP REACTIONS, LOCAL *
+                   AXIAL,KIP    LAT. y,KIP   LAT. z,KIP MOM x,KIP-IN MOM y,KIP-IN MOM z,KIP-IN
+                  ***********  ***********  ***********  ***********  ***********  ***********
+       MINIMUM        -3.3947  -4.1728E-11      -8.3521  -3.5969E-10       419.34  -2.6140E-09 
+       Pile N.          1           11           11            1            7           11
+       MAXIMUM         48.261   4.0186E-11      -7.1806  -3.5969E-10       464.24   2.6314E-09 
+       Pile N.         11            1            7            1           11            1
+
+       * EFFECTS FOR LATERALLY LOADED PILE *   
+ 
+     PILE     DISPL.      DISPL.      MOMENT      MOMENT       SHEAR       SHEAR    SOIL REACT  SOIL REACT     TOTAL    FLEX. RIG.  FLEX. RIG.  
+               y-DIR       z-DIR       z-DIR       y-DIR       y-DIR       z-DIR       y-DIR       z-DIR      STRESS       z-DIR       y-DIR    
+                IN          IN        KIP-IN      KIP-IN        KIP         KIP       KIP/IN      KIP/IN     KIP/IN**2   KIP-IN**2   KIP-IN**2  
+    ******  **********  **********  **********  **********  **********  **********  **********  **********  **********  **********  **********  
+      Min. -6.9555E-13     -0.1718 -2.6314E-09     -106.69 -4.1728E-11     -8.3521 -5.5562E-13     -0.1159    0.026589  4.2395E+06  3.2657E+06 
+   Pile N.      11           1           1          11          11          11          11          11           1           1          11       
+      Max.  7.6017E-13  5.1191E-03  2.6140E-09      464.24  4.0186E-11      1.4356  5.1553E-13    0.020255      0.4547  1.4883E+07  1.4883E+07 
+   Pile N.       1          11          11          11           1          11           1          11          11           1           1       
