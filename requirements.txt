@@ -1,0 +1,127 @@
+# Core dependencies for Text-to-CAD Multi-Agent System
+# Optimized for computational efficiency
+
+# Async processing and utilities
+asyncio-mqtt==0.16.2
+aiofiles==24.1.0
+uvloop==0.19.0  # Linux/Mac only - faster event loop
+
+# Data processing and analysis
+pandas==2.2.3
+numpy==1.26.4
+openpyxl==3.1.5  # Excel file processing
+xlrd==2.0.1  # Legacy Excel support
+
+# Natural language processing (lightweight)
+spacy==3.7.6
+nltk==3.9.1
+regex==2024.9.11
+
+# Machine learning (optional - for future enhancements)
+scikit-learn==1.5.2
+torch==2.4.1  # CPU version for efficiency
+transformers==4.45.2
+
+# IFC processing
+ifcopenshell==0.8.0  # Primary IFC library
+ifcopenshell-python==0.8.0
+
+# PDF processing
+PyPDF2==3.0.1
+pdfplumber==0.11.4
+
+# Image processing (for future CAD drawing analysis)
+Pillow==10.4.0
+opencv-python==4.10.0.84
+
+# Web framework (for future API)
+fastapi==0.115.0
+uvicorn==0.30.6
+
+# Database (for caching and knowledge base)
+sqlite3  # Built-in Python module
+redis==5.1.1
+psycopg2-binary==2.9.9  # PostgreSQL
+
+# Message queue
+celery==5.4.0
+kombu==5.4.2
+
+# Monitoring and logging
+prometheus-client==0.21.0
+structlog==24.4.0
+
+# Testing
+pytest==8.3.3
+pytest-asyncio==0.24.0
+pytest-cov==5.0.0
+
+# Development tools
+black==24.8.0
+isort==5.13.2
+flake8==7.1.1
+mypy==1.11.2
+
+# Performance optimization
+cython==3.0.11  # For compiling performance-critical code
+numba==0.60.0   # JIT compilation for numerical functions
+
+# Configuration and environment
+python-dotenv==1.0.1
+pydantic==2.9.2
+pydantic-settings==2.5.2
+
+# File handling
+pathlib2==2.3.7
+watchdog==5.0.3
+
+# Networking and HTTP
+httpx==0.27.2
+requests==2.32.3
+
+# Mathematical operations
+sympy==1.13.3
+scipy==1.14.1
+
+# Engineering calculations
+engineering-toolbox==0.1.0  # Custom package for engineering utilities
+
+# Geometry processing
+shapely==2.0.6
+matplotlib==3.9.2  # For visualization
+
+# Time and date handling
+python-dateutil==2.9.0
+pytz==2024.2
+
+# Memory profiling and optimization
+memory-profiler==0.61.0
+pympler==0.9
+
+# Configuration management
+configparser==7.1.0
+yaml==6.0.2
+toml==0.10.2
+
+# Concurrent processing
+concurrent-futures==3.1.1
+multiprocessing-logging==0.3.4
+
+# Error handling and debugging
+sentry-sdk==2.14.0
+traceback2==1.4.0
+
+# Progress tracking
+tqdm==4.66.5
+
+# Data validation
+marshmallow==3.22.0
+cerberus==1.3.5
+
+# Caching
+diskcache==5.6.3
+cachetools==5.5.0
+
+# Version compatibility
+typing-extensions==4.12.2
+importlib-metadata==8.5.0
