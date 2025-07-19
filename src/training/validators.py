@@ -11,6 +11,8 @@ import json
 import re
 
 from .data_loader import TrainingExample
+from .ids_parser import IDSParser
+from .ids_validator import IDSValidator
 from ..main import get_system
 
 class ModelValidator:
@@ -22,7 +24,13 @@ class ModelValidator:
         self.validation_results = []
         self.test_cases = []
         
-        logging.info("ModelValidator initialized")
+        # IDS validation components
+        self.ids_parser = IDSParser()
+        self.ids_validator = IDSValidator()
+        self.ids_specifications = []
+        self._load_ids_specifications()
+        
+        logging.info(f"ModelValidator initialized with {len(self.ids_specifications)} IDS specifications")
     
     async def validate_prompt_parser(self, test_examples: List[TrainingExample]) -> Dict[str, float]:
         """Validate prompt parser performance"""
@@ -179,6 +187,85 @@ class ModelValidator:
         logging.info(f"Complete system validation: Completion rate={metrics['completion_rate']:.3f}")
         return metrics
     
+    async def validate_ids_compliance(self, test_examples: List[TrainingExample]) -> Dict[str, float]:
+        """Validate IDS (Information Delivery Specification) compliance"""
+        
+        logging.info(f"Validating IDS compliance with {len(test_examples)} examples")
+        
+        if not self.ids_specifications:
+            logging.warning("No IDS specifications loaded for validation")
+            return {
+                "compliance_rate": 0.0,
+                "total_examples": len(test_examples),
+                "validated_examples": 0,
+                "specifications_used": 0
+            }
+        
+        compliant_examples = 0
+        total_validations = 0
+        specification_results = {}
+        
+        for example in test_examples:
+            try:
+                # Generate IFC content for the example (simplified)
+                ifc_content = await self._generate_test_ifc_content(example)
+                
+                if not ifc_content:
+                    continue
+                
+                # Find applicable IDS specifications
+                applicable_specs = self._find_applicable_specs_for_example(example)
+                
+                for spec_info in applicable_specs[:2]:  # Limit to 2 specs per example
+                    try:
+                        # Save temporary IFC file
+                        temp_ifc_path = Path(f"temp_validation_{total_validations}.ifc")
+                        with open(temp_ifc_path, 'w', encoding='utf-8') as f:
+                            f.write(ifc_content)
+                        
+                        # Validate against IDS
+                        spec_file = Path(spec_info['file'])
+                        result = self.ids_validator.validate_ifc_against_ids(temp_ifc_path, spec_file)
+                        
+                        total_validations += 1
+                        spec_name = spec_info['name']
+                        
+                        if spec_name not in specification_results:
+                            specification_results[spec_name] = {'passed': 0, 'total': 0}
+                        
+                        specification_results[spec_name]['total'] += 1
+                        
+                        if result.overall_passed:
+                            compliant_examples += 1
+                            specification_results[spec_name]['passed'] += 1
+                        
+                        # Cleanup
+                        if temp_ifc_path.exists():
+                            temp_ifc_path.unlink()
+                            
+                    except Exception as e:
+                        logging.warning(f"IDS validation failed for {spec_info['name']}: {e}")
+                
+            except Exception as e:
+                logging.warning(f"IDS compliance validation error for example: {e}")
+        
+        compliance_rate = compliant_examples / max(1, total_validations)
+        
+        metrics = {
+            "compliance_rate": compliance_rate,
+            "total_examples": len(test_examples),
+            "validated_examples": total_validations,
+            "compliant_examples": compliant_examples,
+            "specifications_used": len(specification_results),
+            "specification_results": specification_results,
+            "average_compliance_per_spec": sum(
+                r['passed'] / max(1, r['total']) for r in specification_results.values()
+            ) / max(1, len(specification_results))
+        }
+        
+        logging.info(f"IDS compliance validation: {compliance_rate:.3f} compliance rate ({compliant_examples}/{total_validations})")
+        return metrics
+
     async def validate_engineering_accuracy(self, test_examples: List[TrainingExample]) -> Dict[str, float]:
         """Validate engineering accuracy and code compliance"""
         
@@ -300,14 +387,16 @@ class ModelValidator:
         ifc_metrics = await self.validate_ifc_generator(test_examples)
         system_metrics = await self.validate_complete_system(test_examples[:5])  # Limit for performance
         engineering_metrics = await self.validate_engineering_accuracy(test_examples)
+        ids_metrics = await self.validate_ids_compliance(test_examples[:5])  # Limit for performance
         
-        # Calculate composite scores
+        # Calculate composite scores (including IDS compliance)
         composite_score = (
-            prompt_metrics.get("overall_accuracy", 0.0) * 0.25 +
-            file_metrics.get("success_rate", 0.0) * 0.15 +
-            ifc_metrics.get("generation_success_rate", 0.0) * 0.25 +
+            prompt_metrics.get("overall_accuracy", 0.0) * 0.20 +
+            file_metrics.get("success_rate", 0.0) * 0.10 +
+            ifc_metrics.get("generation_success_rate", 0.0) * 0.20 +
             system_metrics.get("completion_rate", 0.0) * 0.20 +
-            engineering_metrics.get("overall_engineering_score", 0.0) * 0.15
+            engineering_metrics.get("overall_engineering_score", 0.0) * 0.15 +
+            ids_metrics.get("compliance_rate", 0.0) * 0.15
         )
         
         validation_report = {
@@ -317,7 +406,8 @@ class ModelValidator:
                 "file_analyzer": file_metrics,
                 "ifc_generator": ifc_metrics,
                 "complete_system": system_metrics,
-                "engineering_accuracy": engineering_metrics
+                "engineering_accuracy": engineering_metrics,
+                "ids_compliance": ids_metrics
             },
             "validation_summary": {
                 "total_test_examples": len(test_examples),
@@ -331,7 +421,8 @@ class ModelValidator:
                 "file_analyzer": file_metrics,
                 "ifc_generator": ifc_metrics,
                 "complete_system": system_metrics,
-                "engineering_accuracy": engineering_metrics
+                "engineering_accuracy": engineering_metrics,
+                "ids_compliance": ids_metrics
             })
         }
         
@@ -461,4 +552,137 @@ class ModelValidator:
         if engineering_score < 0.8:
             recommendations.append("Engineering accuracy needs improvement. Review code compliance and validation rules.")
         
+        # IDS compliance recommendations
+        ids_compliance = component_scores.get("ids_compliance", {}).get("compliance_rate", 0.0)
+        if ids_compliance < 0.6:
+            recommendations.append("IDS compliance rate is low. Review Information Delivery Specifications and improve model generation.")
+        elif ids_compliance < 0.8:
+            recommendations.append("IDS compliance is moderate. Focus on specific specification requirements.")
+        
+        ids_validations = component_scores.get("ids_compliance", {}).get("validated_examples", 0)
+        if ids_validations > 0:
+            recommendations.append(f"IDS validation performed on {ids_validations} examples. Use IDS training data to improve compliance.")
+        
         return recommendations
+    
+    def _load_ids_specifications(self):
+        """Load available IDS specifications for validation"""
+        
+        self.ids_specifications = []
+        
+        # Load from training data directory
+        ids_dir = Path("training_data/ids_specifications")
+        if ids_dir.exists():
+            for ids_file in ids_dir.glob("*.ids"):
+                try:
+                    document = self.ids_parser.parse_ids_file(ids_file)
+                    self.ids_specifications.append({
+                        'file': str(ids_file),
+                        'document': document,
+                        'name': document.info.title,
+                        'domain': self.ids_parser._classify_domain(document),
+                        'complexity': self.ids_parser._calculate_complexity_score(document)
+                    })
+                except Exception as e:
+                    logging.warning(f"Failed to load IDS specification {ids_file}: {e}")
+        
+        # Load from buildingSMART examples
+        ids_examples_dir = Path("buildingsmart_ids/Documentation/Examples")
+        if ids_examples_dir.exists():
+            for ids_file in list(ids_examples_dir.glob("*.ids"))[:5]:  # Limit to 5 examples
+                try:
+                    document = self.ids_parser.parse_ids_file(ids_file)
+                    self.ids_specifications.append({
+                        'file': str(ids_file),
+                        'document': document,
+                        'name': document.info.title,
+                        'domain': self.ids_parser._classify_domain(document),
+                        'complexity': self.ids_parser._calculate_complexity_score(document)
+                    })
+                except Exception as e:
+                    pass  # Skip files that fail to parse
+        
+        logging.info(f"Loaded {len(self.ids_specifications)} IDS specifications for validation")
+    
+    async def _generate_test_ifc_content(self, example: TrainingExample) -> Optional[str]:
+        """Generate test IFC content for validation (simplified)"""
+        
+        # This is a simplified implementation
+        # In practice, this would use the full system to generate IFC content
+        
+        ifc_template = '''ISO-10303-21;
+HEADER;
+FILE_DESCRIPTION(('ViewDefinition [CoordinationView]'),'2;1');
+FILE_NAME('test_model.ifc','2025-01-01T00:00:00',('Text-to-CAD'),('buildingSMART'),
+          'Text-to-CAD System','Text-to-CAD System','');
+FILE_SCHEMA(('IFC4'));
+ENDSEC;
+
+DATA;
+#1=IFCPROJECT('0YvhU1xkr5$wblLr33FF8B',$,'Test Project',$,$,$,$,$,#2);
+#2=IFCUNITASSIGNMENT((#3,#4));
+#3=IFCSIUNIT(*,.LENGTHUNIT.,.MILLI.,.METRE.);
+#4=IFCSIUNIT(*,.AREAUNIT.,.MILLI.,.SQUARE_METRE.);
+#5=IFCSITE('1YvhU1xkr5$wblLr33FF8C',$,'Test Site',$,$,#6,$,$,.ELEMENT.,$,$,$,$,$);
+#6=IFCLOCALPLACEMENT($,#7);
+#7=IFCAXIS2PLACEMENT3D(#8,$,$);
+#8=IFCCARTESIANPOINT((0.,0.,0.));
+#9=IFCBUILDING('2YvhU1xkr5$wblLr33FF8D',$,'Test Building',$,$,#10,$,$,.ELEMENT.,$,$,$);
+#10=IFCLOCALPLACEMENT(#6,#11);
+#11=IFCAXIS2PLACEMENT3D(#12,$,$);
+#12=IFCCARTESIANPOINT((0.,0.,0.));
+'''
+        
+        # Add some basic elements based on the example
+        element_id = 100
+        elements = []
+        
+        # Check for wall requirement
+        if 'wall' in example.prompt.lower():
+            elements.append(f'#{element_id}=IFCWALL(\'{element_id}YvhU1xkr5$wblLr33FF8E\',$,\'Test Wall\',$,$,#20,$,\'Test Wall\',.STANDARD.);')
+            element_id += 1
+        
+        # Check for beam requirement  
+        if 'beam' in example.prompt.lower():
+            elements.append(f'#{element_id}=IFCBEAM(\'{element_id}YvhU1xkr5$wblLr33FF8E\',$,\'Test Beam\',$,$,#21,$,\'Test Beam\',.BEAM.);')
+            element_id += 1
+        
+        # Add elements to template
+        if elements:
+            ifc_template += '\n'.join(elements) + '\n'
+        
+        ifc_template += '''ENDSEC;
+END-ISO-10303-21;
+'''
+        
+        return ifc_template
+    
+    def _find_applicable_specs_for_example(self, example: TrainingExample) -> List[Dict[str, Any]]:
+        """Find IDS specifications applicable to a training example"""
+        
+        applicable_specs = []
+        prompt_lower = example.prompt.lower()
+        intent_lower = example.intent.lower()
+        
+        # Look for domain-specific specifications
+        target_domains = []
+        
+        if any(keyword in prompt_lower for keyword in ['wall', 'building', 'architecture']):
+            target_domains.append('architectural')
+        if any(keyword in prompt_lower for keyword in ['beam', 'column', 'structural']):
+            target_domains.append('structural')
+        if any(keyword in intent_lower for keyword in ['ids', 'compliance']):
+            target_domains.extend(['general', 'architectural', 'structural'])
+        
+        if not target_domains:
+            target_domains.append('general')
+        
+        # Find matching specifications
+        for spec in self.ids_specifications:
+            if spec['domain'] in target_domains:
+                applicable_specs.append(spec)
+        
+        # Sort by complexity (simpler first)
+        applicable_specs.sort(key=lambda x: x['complexity'])
+        
+        return applicable_specs[:3]  # Limit to 3 most applicable

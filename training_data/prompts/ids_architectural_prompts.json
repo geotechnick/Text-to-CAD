@@ -1,0 +1,193 @@
+{
+  "prompts": [
+    {
+      "text": "Create a design that meets the following requirements: Glazing in a window. Include window of type WINDOW.",
+      "intent": "architectural_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "architectural",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "Beglazing",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet Beglazing requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Create a design that meets the following requirements: Glazing in a window. Include window of type WINDOW.",
+        "specification_name": "Beglazing",
+        "ifc_versions": [
+          "IFC4"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": "IFCWINDOW",
+              "predefined_type": "WINDOW",
+              "cardinality": "required"
+            }
+          ],
+          "properties": [],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            "IFCWINDOW"
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "simple",
+        "source_ids_file": "IDS_Aedes_example.ids",
+        "source_domain": "architectural",
+        "ids_complexity": 0.1
+      }
+    },
+    {
+      "text": "Create a design that meets the following requirements: the model must have rooms, every room must have a name from a list of allowed values, every room must have a (unique) room number. Include space. Ensure with Room number specified.",
+      "intent": "architectural_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "architectural",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "Room requirement 1",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet Room requirement 1 requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Create a design that meets the following requirements: the model must have rooms, every room must have a name from a list of allowed values, every room must have a (unique) room number. Include space. Ensure with Room number specified.",
+        "specification_name": "Room requirement 1",
+        "ifc_versions": [
+          "IFC2X3",
+          "IFC4"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": "IFCSPACE",
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [
+            {
+              "property_set": "MyProject",
+              "name": "Room number",
+              "value": null,
+              "data_type": "IFCTEXT",
+              "cardinality": "required"
+            }
+          ],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            "IFCSPACE"
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "moderate",
+        "source_ids_file": "IDS_SimpleBIM_examples.ids",
+        "source_domain": "architectural",
+        "ids_complexity": 0.27142857142857146
+      }
+    },
+    {
+      "text": "Create a design that meets the following requirements: if the model has exterior walls, each exterior wall must have a u-value. Include elements. Ensure with ThermalTransmittance specified.",
+      "intent": "architectural_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "architectural",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "External wall requirement",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet External wall requirement requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Create a design that meets the following requirements: if the model has exterior walls, each exterior wall must have a u-value. Include elements. Ensure with ThermalTransmittance specified.",
+        "specification_name": "External wall requirement",
+        "ifc_versions": [
+          "IFC2X3"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": null,
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [
+            {
+              "property_set": "Pset_WallCommon",
+              "name": "IsExternal",
+              "value": "true",
+              "data_type": "IFCBOOLEAN",
+              "cardinality": "required"
+            },
+            {
+              "property_set": "Pset_WallCommon",
+              "name": "ThermalTransmittance",
+              "value": null,
+              "data_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            null
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "moderate",
+        "source_ids_file": "IDS_SimpleBIM_examples.ids",
+        "source_domain": "architectural",
+        "ids_complexity": 0.27142857142857146
+      }
+    }
+  ]
+}

@@ -1,0 +1,533 @@
+{
+  "prompts": [
+    {
+      "text": "Design elements according to the 'Aachen test' specification. Include openingelement.",
+      "intent": "general_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "general",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "Aachen test",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet Aachen test requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Design elements according to the 'Aachen test' specification. Include openingelement.",
+        "specification_name": "Aachen test",
+        "ifc_versions": [
+          "IFC2X3"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": "IFCOPENINGELEMENT",
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            "IFCOPENINGELEMENT"
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "simple",
+        "source_ids_file": "IDS_aachen_example.ids",
+        "source_domain": "general",
+        "ids_complexity": 0.1
+      }
+    },
+    {
+      "text": "Design elements according to the 'Project requirements' specification. Include project.",
+      "intent": "general_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "general",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "Project requirements",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet Project requirements requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Design elements according to the 'Project requirements' specification. Include project.",
+        "specification_name": "Project requirements",
+        "ifc_versions": [
+          "IFC2X3"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": "IFCPROJECT",
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            "IFCPROJECT"
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "moderate",
+        "source_ids_file": "IDS_ArcDox.ids",
+        "source_domain": "general",
+        "ids_complexity": 0.5476190476190477
+      }
+    },
+    {
+      "text": "Design elements according to the 'name1' specification. Include building. Ensure with Function specified, with Type of Work specified, with Procurement Method specified, with Expected Life specified.",
+      "intent": "general_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "general",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "name1",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet name1 requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Design elements according to the 'name1' specification. Include building. Ensure with Function specified, with Type of Work specified, with Procurement Method specified, with Expected Life specified.",
+        "specification_name": "name1",
+        "ifc_versions": [
+          "IFC2X3"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": "IFCBUILDING",
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [
+            {
+              "property_set": "ArcDox",
+              "name": "Function",
+              "value": null,
+              "data_type": "IFCTEXT",
+              "cardinality": "required"
+            },
+            {
+              "property_set": "ArcDox",
+              "name": "Type of Work",
+              "value": null,
+              "data_type": "IFCLABEL",
+              "cardinality": "required"
+            },
+            {
+              "property_set": "ArcDox",
+              "name": "Procurement Method",
+              "value": null,
+              "data_type": "IFCTEXT",
+              "cardinality": "required"
+            },
+            {
+              "property_set": "ArcDox",
+              "name": "Expected Life",
+              "value": null,
+              "data_type": "IFCTEXT",
+              "cardinality": "required"
+            }
+          ],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            "IFCBUILDING"
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "moderate",
+        "source_ids_file": "IDS_ArcDox.ids",
+        "source_domain": "general",
+        "ids_complexity": 0.5476190476190477
+      }
+    },
+    {
+      "text": "Design elements according to the 'name2' specification. Include unitassignment.",
+      "intent": "general_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "general",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "name2",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet name2 requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Design elements according to the 'name2' specification. Include unitassignment.",
+        "specification_name": "name2",
+        "ifc_versions": [
+          "IFC2X3"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": "IFCUNITASSIGNMENT",
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            "IFCUNITASSIGNMENT"
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "simple",
+        "source_ids_file": "IDS_ArcDox.ids",
+        "source_domain": "general",
+        "ids_complexity": 0.5476190476190477
+      }
+    },
+    {
+      "text": "Design elements according to the 'name3' specification. Include postaladdress.",
+      "intent": "general_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "general",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "name3",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet name3 requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Design elements according to the 'name3' specification. Include postaladdress.",
+        "specification_name": "name3",
+        "ifc_versions": [
+          "IFC2X3"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": "IFCPOSTALADDRESS",
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            "IFCPOSTALADDRESS"
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.7999999999999998,
+        "complexity": "complex",
+        "source_ids_file": "IDS_ArcDox.ids",
+        "source_domain": "general",
+        "ids_complexity": 0.5476190476190477
+      }
+    },
+    {
+      "text": "Design elements according to the 'name4' specification. Include site.",
+      "intent": "general_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "general",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "name4",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet name4 requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Design elements according to the 'name4' specification. Include site.",
+        "specification_name": "name4",
+        "ifc_versions": [
+          "IFC2X3"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": "IFCSITE",
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            "IFCSITE"
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "moderate",
+        "source_ids_file": "IDS_ArcDox.ids",
+        "source_domain": "general",
+        "ids_complexity": 0.5476190476190477
+      }
+    },
+    {
+      "text": "Create a design that meets the following requirements: Co\u00f6rdineer onderling de lokale positie van het aspectmodel. Deze ligt vlakbij het nulpunt. Er moet exact 1 nulpunt referentieobject in het model aanwezig zijn. Een nulpunt referentieobject is van het IFC type IFCBUILDINGELEMENTPROXY en heeft 'nulpunt' in de naam (in hoofdletters of kleine letters). Include buildingelementproxy.",
+      "intent": "general_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "general",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "lokale positie",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet lokale positie requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Create a design that meets the following requirements: Co\u00f6rdineer onderling de lokale positie van het aspectmodel. Deze ligt vlakbij het nulpunt. Er moet exact 1 nulpunt referentieobject in het model aanwezig zijn. Een nulpunt referentieobject is van het IFC type IFCBUILDINGELEMENTPROXY en heeft 'nulpunt' in de naam (in hoofdletters of kleine letters). Include buildingelementproxy.",
+        "specification_name": "lokale positie",
+        "ifc_versions": [
+          "IFC2X3"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": "IFCBUILDINGELEMENTPROXY",
+              "predefined_type": null,
+              "cardinality": "required"
+            },
+            {
+              "name": "IFCBUILDINGELEMENTPROXY",
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            "IFCBUILDINGELEMENTPROXY"
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "moderate",
+        "source_ids_file": "IDS_demo_BIM-basis-ILS.ids",
+        "source_domain": "general",
+        "ids_complexity": 0.30000000000000004
+      }
+    },
+    {
+      "text": "Create a design that meets the following requirements: Elk aspectmodel hanteert een consistente naamgeving. Ken alle objecten aan de juiste bouwlaag toe. Benoem alleen bouwlagen als IfcBuildingStorey.. Include buildingstorey.",
+      "intent": "general_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "general",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "Bouwlaagindeling en -naamgeving",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet Bouwlaagindeling en -naamgeving requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Create a design that meets the following requirements: Elk aspectmodel hanteert een consistente naamgeving. Ken alle objecten aan de juiste bouwlaag toe. Benoem alleen bouwlagen als IfcBuildingStorey.. Include buildingstorey.",
+        "specification_name": "Bouwlaagindeling en -naamgeving",
+        "ifc_versions": [
+          "IFC2X3"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": "IFCBUILDINGSTOREY",
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            "IFCBUILDINGSTOREY"
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "moderate",
+        "source_ids_file": "IDS_demo_BIM-basis-ILS.ids",
+        "source_domain": "general",
+        "ids_complexity": 0.30000000000000004
+      }
+    },
+    {
+      "text": "Create a design that meets the following requirements: Voorzie objecten altijd van een viercijferige NL-SfB code volgens de laatst gepubliceerde versie.. Include elements.",
+      "intent": "general_with_ids_compliance",
+      "parameters": [
+        {
+          "name": "domain",
+          "value": "general",
+          "confidence": 1.0
+        },
+        {
+          "name": "specification",
+          "value": "Classificatiesystematiek",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [
+        {
+          "type": "ids_compliance",
+          "requirement": "Must meet Classificatiesystematiek requirements"
+        }
+      ],
+      "metadata": {
+        "prompt": "Create a design that meets the following requirements: Voorzie objecten altijd van een viercijferige NL-SfB code volgens de laatst gepubliceerde versie.. Include elements.",
+        "specification_name": "Classificatiesystematiek",
+        "ifc_versions": [
+          "IFC4"
+        ],
+        "requirements": {
+          "entities": [
+            {
+              "name": null,
+              "predefined_type": null,
+              "cardinality": "required"
+            }
+          ],
+          "properties": [],
+          "classifications": [],
+          "materials": [],
+          "attributes": []
+        },
+        "expected_structure": {
+          "required_entities": [
+            null
+          ],
+          "required_properties": [],
+          "spatial_requirements": [],
+          "relationship_requirements": []
+        },
+        "training_weight": 1.2,
+        "complexity": "simple",
+        "source_ids_file": "IDS_demo_BIM-basis-ILS.ids",
+        "source_domain": "general",
+        "ids_complexity": 0.30000000000000004
+      }
+    }
+  ]
+}

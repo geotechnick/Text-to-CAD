@@ -1,0 +1,169 @@
+{
+  "generation_summary": {
+    "total_ids_files_processed": 12,
+    "total_training_examples": 13,
+    "domains_covered": [
+      "structural",
+      "architectural",
+      "general"
+    ],
+    "complexity_distribution": {
+      "simple": 4,
+      "moderate": 8,
+      "complex": 1
+    },
+    "ifc_versions_covered": [
+      "IFC4X3_ADD2",
+      "IFC2X3",
+      "IFC4"
+    ]
+  },
+  "ids_files_summary": [
+    {
+      "file": "IDS_aachen_example.ids",
+      "title": "Example on use of attributes (for student research)",
+      "specifications": 1,
+      "domain": "general",
+      "complexity": 0.1,
+      "ifc_versions": [
+        "IFC2X3"
+      ],
+      "facet_analysis": {
+        "types": {
+          "entity": 1,
+          "attribute": 1
+        },
+        "cardinality_distribution": {
+          "required": 2
+        },
+        "complexity_indicators": {}
+      }
+    },
+    {
+      "file": "IDS_Aedes_example.ids",
+      "title": "AedesUVIP-ILS Window use-case example",
+      "specifications": 1,
+      "domain": "architectural",
+      "complexity": 0.1,
+      "ifc_versions": [
+        "IFC4"
+      ],
+      "facet_analysis": {
+        "types": {
+          "entity": 1,
+          "classification": 1
+        },
+        "cardinality_distribution": {
+          "required": 2
+        },
+        "complexity_indicators": {}
+      }
+    },
+    {
+      "file": "IDS_ArcDox.ids",
+      "title": "Example for ArcDox ",
+      "specifications": 5,
+      "domain": "general",
+      "complexity": 0.5476190476190477,
+      "ifc_versions": [
+        "IFC2X3"
+      ],
+      "facet_analysis": {
+        "types": {
+          "entity": 5,
+          "attribute": 12,
+          "property": 4
+        },
+        "cardinality_distribution": {
+          "required": 21
+        },
+        "complexity_indicators": {}
+      }
+    },
+    {
+      "file": "IDS_demo_BIM-basis-ILS.ids",
+      "title": "Demo - BIM basis ILS",
+      "specifications": 3,
+      "domain": "general",
+      "complexity": 0.30000000000000004,
+      "ifc_versions": [
+        "IFC2X3",
+        "IFC4"
+      ],
+      "facet_analysis": {
+        "types": {
+          "entity": 4,
+          "attribute": 3,
+          "classification": 1
+        },
+        "cardinality_distribution": {
+          "required": 8
+        },
+        "complexity_indicators": {}
+      }
+    },
+    {
+      "file": "IDS_SimpleBIM_examples.ids",
+      "title": "SimpleBIM use-case example",
+      "specifications": 2,
+      "domain": "architectural",
+      "complexity": 0.27142857142857146,
+      "ifc_versions": [
+        "IFC2X3",
+        "IFC4"
+      ],
+      "facet_analysis": {
+        "types": {
+          "entity": 2,
+          "classification": 1,
+          "property": 3,
+          "attribute": 1
+        },
+        "cardinality_distribution": {
+          "required": 7
+        },
+        "complexity_indicators": {}
+      }
+    },
+    {
+      "file": "IDS_StructuralSafety.ids",
+      "title": null,
+      "specifications": 1,
+      "domain": "structural",
+      "complexity": 0.1,
+      "ifc_versions": [
+        "IFC4X3_ADD2"
+      ],
+      "facet_analysis": {
+        "types": {
+          "entity": 1,
+          "material": 2,
+          "property": 1
+        },
+        "cardinality_distribution": {
+          "required": 4
+        },
+        "complexity_indicators": {}
+      }
+    }
+  ],
+  "training_data_files": {
+    "main_prompts": "training_data\\prompts\\ids_compliance_prompts.json",
+    "domain_specific": [
+      "training_data\\prompts\\ids_architectural_prompts.json",
+      "training_data\\prompts\\ids_compliance_prompts.json",
+      "training_data\\prompts\\ids_general_prompts.json"
+    ],
+    "ids_specifications": [
+      "training_data\\ids_specifications\\IDS_aachen_example.ids",
+      "training_data\\ids_specifications\\IDS_Aedes_example.ids",
+      "training_data\\ids_specifications\\IDS_StructuralSafety.ids"
+    ]
+  },
+  "recommendations": [
+    "Use IDS compliance prompts for training IFC generator validation",
+    "Domain-specific prompts can be used for specialized training",
+    "IDS specifications in training directory can be used for validation during training",
+    "Training weight indicates relative importance for curriculum learning"
+  ]
+}

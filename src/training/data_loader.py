@@ -140,9 +140,11 @@ class DataLoader:
                     with open(ifc_file, 'r', encoding='utf-8') as f:
                         ifc_content = f.read()
                     
-                    # Parse basic IFC information
-                    element_count = ifc_content.count('IFCWALL') + ifc_content.count('IFCBEAM') + \
-                                   ifc_content.count('IFCCOLUMN') + ifc_content.count('IFCSLAB')
+                    # Enhanced IFC analysis
+                    element_count = self._count_ifc_elements(ifc_content)
+                    
+                    # Determine domain from file path
+                    domain = self._determine_ifc_domain(ifc_file)
                     
                     # Load metadata if available
                     metadata_file = ifc_file.with_suffix('.metadata.json')
@@ -159,6 +161,14 @@ class DataLoader:
                                 source_prompt = metadata.get('source_prompt')
                         except Exception as e:
                             logging.warning(f"Failed to load IFC metadata for {ifc_file}: {e}")
+                    else:
+                        # Extract spatial hierarchy and properties for reference files
+                        spatial_hierarchy = self._extract_spatial_hierarchy(ifc_content)
+                        properties = self._extract_ifc_properties(ifc_content)
+                        
+                        # Generate reverse-engineered prompt if this is a reference file
+                        if "reference" in str(ifc_file):
+                            source_prompt = self._generate_prompt_from_ifc(ifc_file.name, ifc_content, domain)
                     
                     example = IFCExample(
                         ifc_content=ifc_content,
@@ -469,3 +479,117 @@ class DataLoader:
         stats["constraint_types"] = list(stats["constraint_types"])
         
         return stats
+    
+    def _count_ifc_elements(self, ifc_content: str) -> int:
+        """Count IFC elements in content"""
+        element_types = [
+            'IFCWALL', 'IFCBEAM', 'IFCCOLUMN', 'IFCSLAB', 'IFCDOOR', 'IFCWINDOW',
+            'IFCFOOTING', 'IFCPILE', 'IFCBRIDGE', 'IFCROAD', 'IFCRAIL', 'IFCDUCT',
+            'IFCPIPE', 'IFCPUMP', 'IFCFLOWCONTROLLER', 'IFCSPACE', 'IFCZONE'
+        ]
+        
+        count = 0
+        for element_type in element_types:
+            count += ifc_content.count(element_type)
+        
+        return count
+    
+    def _determine_ifc_domain(self, file_path: Path) -> str:
+        """Determine engineering domain from file path"""
+        path_str = str(file_path).lower()
+        
+        if 'building' in path_str or 'architecture' in path_str or 'hvac' in path_str:
+            return 'building'
+        elif 'infra' in path_str or 'bridge' in path_str or 'road' in path_str or 'rail' in path_str:
+            return 'infrastructure'
+        elif 'structural' in path_str:
+            return 'structural'
+        elif 'landscaping' in path_str or 'plumbing' in path_str:
+            return 'utilities'
+        else:
+            return 'general'
+    
+    def _extract_spatial_hierarchy(self, ifc_content: str) -> Dict[str, Any]:
+        """Extract basic spatial hierarchy from IFC content"""
+        hierarchy = {
+            'project': None,
+            'sites': [],
+            'buildings': [],
+            'storeys': [],
+            'spaces': []
+        }
+        
+        # Simple regex-based extraction (would be enhanced with proper IFC parsing)
+        import re
+        
+        # Extract project
+        project_match = re.search(r'IFCPROJECT\(.*?\)', ifc_content)
+        if project_match:
+            hierarchy['project'] = project_match.group(0)
+        
+        # Extract sites
+        site_matches = re.findall(r'IFCSITE\(.*?\)', ifc_content)
+        hierarchy['sites'] = site_matches[:5]  # Limit to first 5
+        
+        # Extract buildings
+        building_matches = re.findall(r'IFCBUILDING\(.*?\)', ifc_content)
+        hierarchy['buildings'] = building_matches[:5]
+        
+        # Extract storeys/levels
+        storey_matches = re.findall(r'IFCBUILDINGSTOREY\(.*?\)', ifc_content)
+        hierarchy['storeys'] = storey_matches[:10]
+        
+        return hierarchy
+    
+    def _extract_ifc_properties(self, ifc_content: str) -> List[Dict[str, Any]]:
+        """Extract basic properties from IFC content"""
+        properties = []
+        
+        # Extract property sets
+        import re
+        prop_matches = re.findall(r'IFCPROPERTYSET\(.*?\)', ifc_content)
+        
+        for i, prop_match in enumerate(prop_matches[:10]):  # Limit to first 10
+            properties.append({
+                'id': f'prop_{i}',
+                'type': 'property_set',
+                'content': prop_match[:200]  # Truncate long content
+            })
+        
+        return properties
+    
+    def _generate_prompt_from_ifc(self, filename: str, ifc_content: str, domain: str) -> str:
+        """Generate a reverse-engineered prompt from IFC file analysis"""
+        
+        # Analyze filename for clues
+        filename_lower = filename.lower()
+        
+        # Base prompts by domain and filename analysis
+        if 'building-architecture' in filename_lower:
+            return "Design a multi-story building with architectural elements including walls, doors, windows, and spaces"
+        elif 'building-structural' in filename_lower:
+            return "Create a structural building framework with beams, columns, slabs, and foundation elements"
+        elif 'building-hvac' in filename_lower:
+            return "Design an HVAC system for a building including ducts, air handling units, and ventilation spaces"
+        elif 'infra-bridge' in filename_lower:
+            return "Design a bridge structure with deck, supports, abutments, and approach elements"
+        elif 'infra-road' in filename_lower:
+            return "Create a road infrastructure with roadway elements, intersections, and traffic management"
+        elif 'infra-rail' in filename_lower:
+            return "Design a railway infrastructure with tracks, platforms, signals, and support structures"
+        elif 'landscaping' in filename_lower:
+            return "Design landscaping elements including planted areas, paths, and outdoor spaces"
+        elif 'plumbing' in filename_lower:
+            return "Create a plumbing system with pipes, fixtures, pumps, and water management elements"
+        else:
+            # Analyze content for element types
+            wall_count = ifc_content.count('IFCWALL')
+            beam_count = ifc_content.count('IFCBEAM')
+            column_count = ifc_content.count('IFCCOLUMN')
+            
+            if wall_count > beam_count and wall_count > column_count:
+                return f"Design a structure with {wall_count} walls and associated architectural elements"
+            elif beam_count > 0 and column_count > 0:
+                return f"Create a structural framework with {beam_count} beams and {column_count} columns"
+            else:
+                return f"Design a {domain} structure with appropriate engineering elements"

@@ -1,0 +1,1485 @@
+[
+  {
+    "file": "Building-Architecture.ifc",
+    "analysis": {
+      "file_path": "training_data\\ifc_models\\reference\\building\\Building-Architecture.ifc",
+      "file_size": 229547,
+      "element_analysis": {
+        "element_counts": {
+          "IFCWALL": 8,
+          "IFCBEAM": 0,
+          "IFCCOLUMN": 0,
+          "IFCSLAB": 6,
+          "IFCFOOTING": 0,
+          "IFCPILE": 0,
+          "IFCREINFORCINGELEMENT": 0,
+          "IFCDOOR": 0,
+          "IFCWINDOW": 0,
+          "IFCROOF": 2,
+          "IFCSTAIR": 0,
+          "IFCRAMP": 0,
+          "IFCRAILING": 0,
+          "IFCBRIDGE": 0,
+          "IFCROAD": 0,
+          "IFCRAIL": 0,
+          "IFCTUNNEL": 0,
+          "IFCPAVEMENT": 0,
+          "IFCKERB": 0,
+          "IFCSIGN": 0,
+          "IFCDUCT": 0,
+          "IFCPIPE": 0,
+          "IFCPUMP": 0,
+          "IFCFAN": 0,
+          "IFCBOILER": 0,
+          "IFCCHILLER": 0,
+          "IFCVALVE": 0,
+          "IFCFLOWCONTROLLER": 0,
+          "IFCFLOWTERMINAL": 0,
+          "IFCSPACE": 4,
+          "IFCZONE": 1,
+          "IFCBUILDING": 10,
+          "IFCSITE": 2,
+          "IFCBUILDINGSTOREY": 1,
+          "IFCFURNISHINGELEMENT": 0,
+          "IFCDISTRIBUTIONELEMENT": 0,
+          "IFCPROXY": 0,
+          "IFCBUILDINGELEMENTPROXY": 8
+        },
+        "total_elements": 42,
+        "structural_elements": 14,
+        "infrastructure_elements": 0,
+        "mep_elements": 0,
+        "element_distribution": {
+          "structural_percentage": 33.33333333333333,
+          "infrastructure_percentage": 0.0,
+          "mep_percentage": 0.0
+        }
+      },
+      "spatial_analysis": {
+        "spatial_elements": {
+          "projects": 1,
+          "sites": 2,
+          "buildings": 1,
+          "storeys": 1,
+          "spaces": 2,
+          "zones": 1
+        },
+        "relationships": {
+          "aggregates": 6,
+          "spatial_containment": 5
+        },
+        "hierarchy_depth": 5,
+        "spatial_complexity": 1.0
+      },
+      "property_analysis": {
+        "property_sets": 12,
+        "element_quantities": 7,
+        "single_properties": 30,
+        "common_psets_coverage": {
+          "Pset_WallCommon": 4,
+          "Pset_BeamCommon": 0,
+          "Pset_ColumnCommon": 0,
+          "Pset_SlabCommon": 3,
+          "Pset_FootingCommon": 0,
+          "Pset_PileCommon": 0,
+          "Pset_BridgeCommon": 0,
+          "Pset_RoadCommon": 0,
+          "Pset_RailCommon": 0
+        },
+        "property_density": 2.5
+      },
+      "geometry_analysis": {
+        "geometry_types": {
+          "swept_solids": 2,
+          "brep_geometry": 2,
+          "mesh_geometry": 12,
+          "curve_geometry": 0,
+          "points": 60,
+          "directions": 50
+        },
+        "total_geometry_objects": 126,
+        "geometry_complexity": 0.20317460317460317,
+        "coordinate_system_analysis": {
+          "unit_assignments": 1,
+          "si_units": 3,
+          "uses_metric": true,
+          "uses_imperial": false,
+          "coordinate_systems": 24
+        }
+      },
+      "schema_validation": {
+        "schema_version": "IFC4",
+        "validation_checks": {
+          "has_header": true,
+          "has_schema": true,
+          "has_project": true,
+          "proper_ending": true,
+          "entity_consistency": 0.8
+        },
+        "validation_score": 0.96,
+        "schema_compliance": true
+      },
+      "engineering_classification": {
+        "domain_scores": {
+          "building_architecture": 5,
+          "building_structural": 0,
+          "building_mep": 0,
+          "infrastructure_transport": 0,
+          "infrastructure_utilities": 0,
+          "civil_works": 0
+        },
+        "primary_domain": "building_architecture",
+        "confidence": 1.0,
+        "complexity_level": "moderate"
+      },
+      "quality_metrics": {
+        "completeness_score": 0.3094777562862669,
+        "consistency_score": 0.8,
+        "richness_score": 0.8897485493230174,
+        "overall_quality": 0.6307156673114119,
+        "entity_count": 517,
+        "geometric_coverage": 0.030947775628626693
+      }
+    },
+    "metadata": {
+      "domain": "building_architecture",
+      "complexity": "moderate",
+      "element_count": 42,
+      "quality_score": 0.6307156673114119,
+      "spatial_hierarchy": {
+        "projects": 1,
+        "sites": 2,
+        "buildings": 1,
+        "storeys": 1,
+        "spaces": 2,
+        "zones": 1
+      },
+      "recommended_training_weight": 0.7568588007736943,
+      "suitable_for_validation": false,
+      "training_tags": [
+        "building_architecture",
+        "complexity_moderate",
+        "walls",
+        "medium_quality"
+      ]
+    }
+  },
+  {
+    "file": "Building-Hvac.ifc",
+    "analysis": {
+      "file_path": "training_data\\ifc_models\\reference\\building\\Building-Hvac.ifc",
+      "file_size": 179891,
+      "element_analysis": {
+        "element_counts": {
+          "IFCWALL": 0,
+          "IFCBEAM": 0,
+          "IFCCOLUMN": 0,
+          "IFCSLAB": 0,
+          "IFCFOOTING": 0,
+          "IFCPILE": 0,
+          "IFCREINFORCINGELEMENT": 0,
+          "IFCDOOR": 0,
+          "IFCWINDOW": 0,
+          "IFCROOF": 0,
+          "IFCSTAIR": 0,
+          "IFCRAMP": 0,
+          "IFCRAILING": 0,
+          "IFCBRIDGE": 0,
+          "IFCROAD": 0,
+          "IFCRAIL": 0,
+          "IFCTUNNEL": 0,
+          "IFCPAVEMENT": 0,
+          "IFCKERB": 0,
+          "IFCSIGN": 0,
+          "IFCDUCT": 2,
+          "IFCPIPE": 0,
+          "IFCPUMP": 0,
+          "IFCFAN": 0,
+          "IFCBOILER": 0,
+          "IFCCHILLER": 0,
+          "IFCVALVE": 0,
+          "IFCFLOWCONTROLLER": 0,
+          "IFCFLOWTERMINAL": 0,
+          "IFCSPACE": 0,
+          "IFCZONE": 0,
+          "IFCBUILDING": 6,
+          "IFCSITE": 2,
+          "IFCBUILDINGSTOREY": 1,
+          "IFCFURNISHINGELEMENT": 0,
+          "IFCDISTRIBUTIONELEMENT": 0,
+          "IFCPROXY": 0,
+          "IFCBUILDINGELEMENTPROXY": 4
+        },
+        "total_elements": 15,
+        "structural_elements": 0,
+        "infrastructure_elements": 0,
+        "mep_elements": 2,
+        "element_distribution": {
+          "structural_percentage": 0.0,
+          "infrastructure_percentage": 0.0,
+          "mep_percentage": 13.333333333333334
+        }
+      },
+      "spatial_analysis": {
+        "spatial_elements": {
+          "projects": 1,
+          "sites": 2,
+          "buildings": 1,
+          "storeys": 1,
+          "spaces": 0,
+          "zones": 0
+        },
+        "relationships": {
+          "aggregates": 4,
+          "spatial_containment": 3
+        },
+        "hierarchy_depth": 4,
+        "spatial_complexity": 0.8333333333333333
+      },
+      "property_analysis": {
+        "property_sets": 1,
+        "element_quantities": 0,
+        "single_properties": 1,
+        "common_psets_coverage": {
+          "Pset_WallCommon": 0,
+          "Pset_BeamCommon": 0,
+          "Pset_ColumnCommon": 0,
+          "Pset_SlabCommon": 0,
+          "Pset_FootingCommon": 0,
+          "Pset_PileCommon": 0,
+          "Pset_BridgeCommon": 0,
+          "Pset_RoadCommon": 0,
+          "Pset_RailCommon": 0
+        },
+        "property_density": 1.0
+      },
+      "geometry_analysis": {
+        "geometry_types": {
+          "swept_solids": 0,
+          "brep_geometry": 0,
+          "mesh_geometry": 5,
+          "curve_geometry": 0,
+          "points": 10,
+          "directions": 20
+        },
+        "total_geometry_objects": 35,
+        "geometry_complexity": 0.22857142857142856,
+        "coordinate_system_analysis": {
+          "unit_assignments": 1,
+          "si_units": 3,
+          "uses_metric": true,
+          "uses_imperial": false,
+          "coordinate_systems": 10
+        }
+      },
+      "schema_validation": {
+        "schema_version": "IFC4",
+        "validation_checks": {
+          "has_header": true,
+          "has_schema": true,
+          "has_project": true,
+          "proper_ending": true,
+          "entity_consistency": 0.8
+        },
+        "validation_score": 0.96,
+        "schema_compliance": true
+      },
+      "engineering_classification": {
+        "domain_scores": {
+          "building_architecture": 0,
+          "building_structural": 0,
+          "building_mep": 5,
+          "infrastructure_transport": 0,
+          "infrastructure_utilities": 0,
+          "civil_works": 0
+        },
+        "primary_domain": "building_mep",
+        "confidence": 1.0,
+        "complexity_level": "moderate"
+      },
+      "quality_metrics": {
+        "completeness_score": 0.3205128205128205,
+        "consistency_score": 0.8,
+        "richness_score": 1.0,
+        "overall_quality": 0.6682051282051282,
+        "entity_count": 156,
+        "geometric_coverage": 0.03205128205128205
+      }
+    },
+    "metadata": {
+      "domain": "building_mep",
+      "complexity": "moderate",
+      "element_count": 15,
+      "quality_score": 0.6682051282051282,
+      "spatial_hierarchy": {
+        "projects": 1,
+        "sites": 2,
+        "buildings": 1,
+        "storeys": 1,
+        "spaces": 0,
+        "zones": 0
+      },
+      "recommended_training_weight": 0.8018461538461539,
+      "suitable_for_validation": false,
+      "training_tags": [
+        "building_mep",
+        "complexity_moderate",
+        "mep_systems",
+        "medium_quality"
+      ]
+    }
+  },
+  {
+    "file": "Building-Landscaping.ifc",
+    "analysis": {
+      "file_path": "training_data\\ifc_models\\reference\\building\\Building-Landscaping.ifc",
+      "file_size": 1467818,
+      "element_analysis": {
+        "element_counts": {
+          "IFCWALL": 0,
+          "IFCBEAM": 0,
+          "IFCCOLUMN": 0,
+          "IFCSLAB": 0,
+          "IFCFOOTING": 0,
+          "IFCPILE": 0,
+          "IFCREINFORCINGELEMENT": 0,
+          "IFCDOOR": 0,
+          "IFCWINDOW": 0,
+          "IFCROOF": 0,
+          "IFCSTAIR": 0,
+          "IFCRAMP": 0,
+          "IFCRAILING": 0,
+          "IFCBRIDGE": 0,
+          "IFCROAD": 0,
+          "IFCRAIL": 0,
+          "IFCTUNNEL": 0,
+          "IFCPAVEMENT": 0,
+          "IFCKERB": 0,
+          "IFCSIGN": 0,
+          "IFCDUCT": 0,
+          "IFCPIPE": 0,
+          "IFCPUMP": 0,
+          "IFCFAN": 0,
+          "IFCBOILER": 0,
+          "IFCCHILLER": 0,
+          "IFCVALVE": 0,
+          "IFCFLOWCONTROLLER": 0,
+          "IFCFLOWTERMINAL": 0,
+          "IFCSPACE": 0,
+          "IFCZONE": 0,
+          "IFCBUILDING": 5,
+          "IFCSITE": 2,
+          "IFCBUILDINGSTOREY": 0,
+          "IFCFURNISHINGELEMENT": 0,
+          "IFCDISTRIBUTIONELEMENT": 0,
+          "IFCPROXY": 0,
+          "IFCBUILDINGELEMENTPROXY": 5
+        },
+        "total_elements": 12,
+        "structural_elements": 0,
+        "infrastructure_elements": 0,
+        "mep_elements": 0,
+        "element_distribution": {
+          "structural_percentage": 0.0,
+          "infrastructure_percentage": 0.0,
+          "mep_percentage": 0.0
+        }
+      },
+      "spatial_analysis": {
+        "spatial_elements": {
+          "projects": 1,
+          "sites": 2,
+          "buildings": 0,
+          "storeys": 0,
+          "spaces": 0,
+          "zones": 0
+        },
+        "relationships": {
+          "aggregates": 2,
+          "spatial_containment": 2
+        },
+        "hierarchy_depth": 2,
+        "spatial_complexity": 0.6666666666666666
+      },
+      "property_analysis": {
+        "property_sets": 0,
+        "element_quantities": 0,
+        "single_properties": 0,
+        "common_psets_coverage": {
+          "Pset_WallCommon": 0,
+          "Pset_BeamCommon": 0,
+          "Pset_ColumnCommon": 0,
+          "Pset_SlabCommon": 0,
+          "Pset_FootingCommon": 0,
+          "Pset_PileCommon": 0,
+          "Pset_BridgeCommon": 0,
+          "Pset_RoadCommon": 0,
+          "Pset_RailCommon": 0
+        },
+        "property_density": 0.0
+      },
+      "geometry_analysis": {
+        "geometry_types": {
+          "swept_solids": 0,
+          "brep_geometry": 0,
+          "mesh_geometry": 7,
+          "curve_geometry": 0,
+          "points": 9,
+          "directions": 18
+        },
+        "total_geometry_objects": 34,
+        "geometry_complexity": 0.28529411764705886,
+        "coordinate_system_analysis": {
+          "unit_assignments": 1,
+          "si_units": 3,
+          "uses_metric": true,
+          "uses_imperial": false,
+          "coordinate_systems": 9
+        }
+      },
+      "schema_validation": {
+        "schema_version": "IFC4",
+        "validation_checks": {
+          "has_header": true,
+          "has_schema": true,
+          "has_project": true,
+          "proper_ending": true,
+          "entity_consistency": 0.8
+        },
+        "validation_score": 0.96,
+        "schema_compliance": true
+      },
+      "engineering_classification": {
+        "domain_scores": {
+          "building_architecture": 0,
+          "building_structural": 0,
+          "building_mep": 0,
+          "infrastructure_transport": 0,
+          "infrastructure_utilities": 0,
+          "civil_works": 0
+        },
+        "primary_domain": "building_architecture",
+        "confidence": 0.0,
+        "complexity_level": "moderate"
+      },
+      "quality_metrics": {
+        "completeness_score": 0.4430379746835443,
+        "consistency_score": 0.8,
+        "richness_score": 0.5063291139240506,
+        "overall_quality": 0.5691139240506329,
+        "entity_count": 158,
+        "geometric_coverage": 0.04430379746835443
+      }
+    },
+    "metadata": {
+      "domain": "building_architecture",
+      "complexity": "moderate",
+      "element_count": 12,
+      "quality_score": 0.5691139240506329,
+      "spatial_hierarchy": {
+        "projects": 1,
+        "sites": 2,
+        "buildings": 0,
+        "storeys": 0,
+        "spaces": 0,
+        "zones": 0
+      },
+      "recommended_training_weight": 0.6829367088607594,
+      "suitable_for_validation": false,
+      "training_tags": [
+        "building_architecture",
+        "complexity_moderate",
+        "low_quality"
+      ]
+    }
+  },
+  {
+    "file": "Building-Structural.ifc",
+    "analysis": {
+      "file_path": "training_data\\ifc_models\\reference\\building\\Building-Structural.ifc",
+      "file_size": 297055,
+      "element_analysis": {
+        "element_counts": {
+          "IFCWALL": 8,
+          "IFCBEAM": 7,
+          "IFCCOLUMN": 0,
+          "IFCSLAB": 0,
+          "IFCFOOTING": 2,
+          "IFCPILE": 0,
+          "IFCREINFORCINGELEMENT": 0,
+          "IFCDOOR": 0,
+          "IFCWINDOW": 0,
+          "IFCROOF": 2,
+          "IFCSTAIR": 0,
+          "IFCRAMP": 0,
+          "IFCRAILING": 0,
+          "IFCBRIDGE": 0,
+          "IFCROAD": 0,
+          "IFCRAIL": 0,
+          "IFCTUNNEL": 0,
+          "IFCPAVEMENT": 0,
+          "IFCKERB": 0,
+          "IFCSIGN": 0,
+          "IFCDUCT": 0,
+          "IFCPIPE": 0,
+          "IFCPUMP": 0,
+          "IFCFAN": 0,
+          "IFCBOILER": 0,
+          "IFCCHILLER": 0,
+          "IFCVALVE": 0,
+          "IFCFLOWCONTROLLER": 0,
+          "IFCFLOWTERMINAL": 0,
+          "IFCSPACE": 0,
+          "IFCZONE": 0,
+          "IFCBUILDING": 7,
+          "IFCSITE": 2,
+          "IFCBUILDINGSTOREY": 1,
+          "IFCFURNISHINGELEMENT": 0,
+          "IFCDISTRIBUTIONELEMENT": 0,
+          "IFCPROXY": 0,
+          "IFCBUILDINGELEMENTPROXY": 5
+        },
+        "total_elements": 34,
+        "structural_elements": 17,
+        "infrastructure_elements": 0,
+        "mep_elements": 0,
+        "element_distribution": {
+          "structural_percentage": 50.0,
+          "infrastructure_percentage": 0.0,
+          "mep_percentage": 0.0
+        }
+      },
+      "spatial_analysis": {
+        "spatial_elements": {
+          "projects": 1,
+          "sites": 2,
+          "buildings": 1,
+          "storeys": 1,
+          "spaces": 0,
+          "zones": 0
+        },
+        "relationships": {
+          "aggregates": 5,
+          "spatial_containment": 4
+        },
+        "hierarchy_depth": 4,
+        "spatial_complexity": 0.8333333333333333
+      },
+      "property_analysis": {
+        "property_sets": 12,
+        "element_quantities": 10,
+        "single_properties": 21,
+        "common_psets_coverage": {
+          "Pset_WallCommon": 4,
+          "Pset_BeamCommon": 6,
+          "Pset_ColumnCommon": 0,
+          "Pset_SlabCommon": 0,
+          "Pset_FootingCommon": 0,
+          "Pset_PileCommon": 0,
+          "Pset_BridgeCommon": 0,
+          "Pset_RoadCommon": 0,
+          "Pset_RailCommon": 0
+        },
+        "property_density": 1.75
+      },
+      "geometry_analysis": {
+        "geometry_types": {
+          "swept_solids": 0,
+          "brep_geometry": 0,
+          "mesh_geometry": 17,
+          "curve_geometry": 0,
+          "points": 22,
+          "directions": 44
+        },
+        "total_geometry_objects": 83,
+        "geometry_complexity": 0.28433734939759037,
+        "coordinate_system_analysis": {
+          "unit_assignments": 1,
+          "si_units": 3,
+          "uses_metric": true,
+          "uses_imperial": true,
+          "coordinate_systems": 22
+        }
+      },
+      "schema_validation": {
+        "schema_version": "IFC4",
+        "validation_checks": {
+          "has_header": true,
+          "has_schema": true,
+          "has_project": true,
+          "proper_ending": true,
+          "entity_consistency": 0.8
+        },
+        "validation_score": 0.96,
+        "schema_compliance": true
+      },
+      "engineering_classification": {
+        "domain_scores": {
+          "building_architecture": 2,
+          "building_structural": 3,
+          "building_mep": 0,
+          "infrastructure_transport": 0,
+          "infrastructure_utilities": 0,
+          "civil_works": 0
+        },
+        "primary_domain": "building_structural",
+        "confidence": 0.6,
+        "complexity_level": "moderate"
+      },
+      "quality_metrics": {
+        "completeness_score": 0.41769041769041765,
+        "consistency_score": 0.8,
+        "richness_score": 1.0,
+        "overall_quality": 0.707076167076167,
+        "entity_count": 407,
+        "geometric_coverage": 0.04176904176904177
+      }
+    },
+    "metadata": {
+      "domain": "building_structural",
+      "complexity": "moderate",
+      "element_count": 34,
+      "quality_score": 0.707076167076167,
+      "spatial_hierarchy": {
+        "projects": 1,
+        "sites": 2,
+        "buildings": 1,
+        "storeys": 1,
+        "spaces": 0,
+        "zones": 0
+      },
+      "recommended_training_weight": 0.8484914004914005,
+      "suitable_for_validation": true,
+      "training_tags": [
+        "building_structural",
+        "complexity_moderate",
+        "walls",
+        "structural_frame",
+        "medium_quality"
+      ]
+    }
+  },
+  {
+    "file": "Infra-Bridge.ifc",
+    "analysis": {
+      "file_path": "training_data\\ifc_models\\reference\\infrastructure\\Infra-Bridge.ifc",
+      "file_size": 1890255,
+      "element_analysis": {
+        "element_counts": {
+          "IFCWALL": 5,
+          "IFCBEAM": 11,
+          "IFCCOLUMN": 9,
+          "IFCSLAB": 5,
+          "IFCFOOTING": 9,
+          "IFCPILE": 0,
+          "IFCREINFORCINGELEMENT": 0,
+          "IFCDOOR": 0,
+          "IFCWINDOW": 0,
+          "IFCROOF": 0,
+          "IFCSTAIR": 0,
+          "IFCRAMP": 0,
+          "IFCRAILING": 3,
+          "IFCBRIDGE": 0,
+          "IFCROAD": 0,
+          "IFCRAIL": 3,
+          "IFCTUNNEL": 0,
+          "IFCPAVEMENT": 0,
+          "IFCKERB": 0,
+          "IFCSIGN": 0,
+          "IFCDUCT": 0,
+          "IFCPIPE": 0,
+          "IFCPUMP": 0,
+          "IFCFAN": 0,
+          "IFCBOILER": 0,
+          "IFCCHILLER": 0,
+          "IFCVALVE": 0,
+          "IFCFLOWCONTROLLER": 0,
+          "IFCFLOWTERMINAL": 0,
+          "IFCSPACE": 0,
+          "IFCZONE": 0,
+          "IFCBUILDING": 26,
+          "IFCSITE": 6,
+          "IFCBUILDINGSTOREY": 11,
+          "IFCFURNISHINGELEMENT": 0,
+          "IFCDISTRIBUTIONELEMENT": 0,
+          "IFCPROXY": 0,
+          "IFCBUILDINGELEMENTPROXY": 12
+        },
+        "total_elements": 100,
+        "structural_elements": 39,
+        "infrastructure_elements": 3,
+        "mep_elements": 0,
+        "element_distribution": {
+          "structural_percentage": 39.0,
+          "infrastructure_percentage": 3.0,
+          "mep_percentage": 0.0
+        }
+      },
+      "spatial_analysis": {
+        "spatial_elements": {
+          "projects": 1,
+          "sites": 6,
+          "buildings": 3,
+          "storeys": 11,
+          "spaces": 0,
+          "zones": 0
+        },
+        "relationships": {
+          "aggregates": 17,
+          "spatial_containment": 13
+        },
+        "hierarchy_depth": 4,
+        "spatial_complexity": 0.8333333333333333
+      },
+      "property_analysis": {
+        "property_sets": 21,
+        "element_quantities": 15,
+        "single_properties": 0,
+        "common_psets_coverage": {
+          "Pset_WallCommon": 0,
+          "Pset_BeamCommon": 3,
+          "Pset_ColumnCommon": 4,
+          "Pset_SlabCommon": 0,
+          "Pset_FootingCommon": 7,
+          "Pset_PileCommon": 0,
+          "Pset_BridgeCommon": 0,
+          "Pset_RoadCommon": 0,
+          "Pset_RailCommon": 0
+        },
+        "property_density": 0.0
+      },
+      "geometry_analysis": {
+        "geometry_types": {
+          "swept_solids": 0,
+          "brep_geometry": 0,
+          "mesh_geometry": 54,
+          "curve_geometry": 0,
+          "points": 76,
+          "directions": 152
+        },
+        "total_geometry_objects": 282,
+        "geometry_complexity": 0.2723404255319149,
+        "coordinate_system_analysis": {
+          "unit_assignments": 1,
+          "si_units": 3,
+          "uses_metric": true,
+          "uses_imperial": true,
+          "coordinate_systems": 76
+        }
+      },
+      "schema_validation": {
+        "schema_version": "IFC4",
+        "validation_checks": {
+          "has_header": true,
+          "has_schema": true,
+          "has_project": true,
+          "proper_ending": true,
+          "entity_consistency": 0.8
+        },
+        "validation_score": 0.96,
+        "schema_compliance": true
+      },
+      "engineering_classification": {
+        "domain_scores": {
+          "building_architecture": 0,
+          "building_structural": 2,
+          "building_mep": 0,
+          "infrastructure_transport": 3,
+          "infrastructure_utilities": 0,
+          "civil_works": 0
+        },
+        "primary_domain": "infrastructure_transport",
+        "confidence": 0.6,
+        "complexity_level": "moderate"
+      },
+      "quality_metrics": {
+        "completeness_score": 0.5666316894018887,
+        "consistency_score": 0.8,
+        "richness_score": 1.0,
+        "overall_quality": 0.7666526757607555,
+        "entity_count": 953,
+        "geometric_coverage": 0.05666316894018888
+      }
+    },
+    "metadata": {
+      "domain": "infrastructure_transport",
+      "complexity": "moderate",
+      "element_count": 100,
+      "quality_score": 0.7666526757607555,
+      "spatial_hierarchy": {
+        "projects": 1,
+        "sites": 6,
+        "buildings": 3,
+        "storeys": 11,
+        "spaces": 0,
+        "zones": 0
+      },
+      "recommended_training_weight": 0.9199832109129065,
+      "suitable_for_validation": true,
+      "training_tags": [
+        "infrastructure_transport",
+        "complexity_moderate",
+        "walls",
+        "structural_frame",
+        "medium_quality"
+      ]
+    }
+  },
+  {
+    "file": "Infra-Landscaping.ifc",
+    "analysis": {
+      "file_path": "training_data\\ifc_models\\reference\\infrastructure\\Infra-Landscaping.ifc",
+      "file_size": 3088517,
+      "element_analysis": {
+        "element_counts": {
+          "IFCWALL": 0,
+          "IFCBEAM": 0,
+          "IFCCOLUMN": 0,
+          "IFCSLAB": 0,
+          "IFCFOOTING": 0,
+          "IFCPILE": 0,
+          "IFCREINFORCINGELEMENT": 0,
+          "IFCDOOR": 0,
+          "IFCWINDOW": 0,
+          "IFCROOF": 0,
+          "IFCSTAIR": 0,
+          "IFCRAMP": 0,
+          "IFCRAILING": 0,
+          "IFCBRIDGE": 0,
+          "IFCROAD": 0,
+          "IFCRAIL": 0,
+          "IFCTUNNEL": 0,
+          "IFCPAVEMENT": 0,
+          "IFCKERB": 0,
+          "IFCSIGN": 0,
+          "IFCDUCT": 0,
+          "IFCPIPE": 0,
+          "IFCPUMP": 0,
+          "IFCFAN": 0,
+          "IFCBOILER": 0,
+          "IFCCHILLER": 0,
+          "IFCVALVE": 0,
+          "IFCFLOWCONTROLLER": 0,
+          "IFCFLOWTERMINAL": 0,
+          "IFCSPACE": 0,
+          "IFCZONE": 0,
+          "IFCBUILDING": 28,
+          "IFCSITE": 8,
+          "IFCBUILDINGSTOREY": 0,
+          "IFCFURNISHINGELEMENT": 0,
+          "IFCDISTRIBUTIONELEMENT": 0,
+          "IFCPROXY": 0,
+          "IFCBUILDINGELEMENTPROXY": 18
+        },
+        "total_elements": 54,
+        "structural_elements": 0,
+        "infrastructure_elements": 0,
+        "mep_elements": 0,
+        "element_distribution": {
+          "structural_percentage": 0.0,
+          "infrastructure_percentage": 0.0,
+          "mep_percentage": 0.0
+        }
+      },
+      "spatial_analysis": {
+        "spatial_elements": {
+          "projects": 1,
+          "sites": 8,
+          "buildings": 10,
+          "storeys": 0,
+          "spaces": 0,
+          "zones": 0
+        },
+        "relationships": {
+          "aggregates": 17,
+          "spatial_containment": 8
+        },
+        "hierarchy_depth": 3,
+        "spatial_complexity": 0.75
+      },
+      "property_analysis": {
+        "property_sets": 58,
+        "element_quantities": 0,
+        "single_properties": 116,
+        "common_psets_coverage": {
+          "Pset_WallCommon": 0,
+          "Pset_BeamCommon": 0,
+          "Pset_ColumnCommon": 0,
+          "Pset_SlabCommon": 0,
+          "Pset_FootingCommon": 0,
+          "Pset_PileCommon": 0,
+          "Pset_BridgeCommon": 0,
+          "Pset_RoadCommon": 0,
+          "Pset_RailCommon": 0
+        },
+        "property_density": 2.0
+      },
+      "geometry_analysis": {
+        "geometry_types": {
+          "swept_solids": 0,
+          "brep_geometry": 0,
+          "mesh_geometry": 38,
+          "curve_geometry": 0,
+          "points": 129,
+          "directions": 258
+        },
+        "total_geometry_objects": 425,
+        "geometry_complexity": 0.18047058823529413,
+        "coordinate_system_analysis": {
+          "unit_assignments": 1,
+          "si_units": 3,
+          "uses_metric": true,
+          "uses_imperial": false,
+          "coordinate_systems": 129
+        }
+      },
+      "schema_validation": {
+        "schema_version": "IFC4",
+        "validation_checks": {
+          "has_header": true,
+          "has_schema": true,
+          "has_project": true,
+          "proper_ending": true,
+          "entity_consistency": 0.8
+        },
+        "validation_score": 0.96,
+        "schema_compliance": true
+      },
+      "engineering_classification": {
+        "domain_scores": {
+          "building_architecture": 0,
+          "building_structural": 0,
+          "building_mep": 0,
+          "infrastructure_transport": 0,
+          "infrastructure_utilities": 0,
+          "civil_works": 0
+        },
+        "primary_domain": "building_architecture",
+        "confidence": 0.0,
+        "complexity_level": "complex"
+      },
+      "quality_metrics": {
+        "completeness_score": 0.2553763440860215,
+        "consistency_score": 0.8,
+        "richness_score": 1.0,
+        "overall_quality": 0.6421505376344085,
+        "entity_count": 1488,
+        "geometric_coverage": 0.025537634408602152
+      }
+    },
+    "metadata": {
+      "domain": "building_architecture",
+      "complexity": "complex",
+      "element_count": 54,
+      "quality_score": 0.6421505376344085,
+      "spatial_hierarchy": {
+        "projects": 1,
+        "sites": 8,
+        "buildings": 10,
+        "storeys": 0,
+        "spaces": 0,
+        "zones": 0
+      },
+      "recommended_training_weight": 0.9632258064516128,
+      "suitable_for_validation": false,
+      "training_tags": [
+        "building_architecture",
+        "complexity_complex",
+        "medium_quality"
+      ]
+    }
+  },
+  {
+    "file": "Infra-Plumbing.ifc",
+    "analysis": {
+      "file_path": "training_data\\ifc_models\\reference\\infrastructure\\Infra-Plumbing.ifc",
+      "file_size": 525188,
+      "element_analysis": {
+        "element_counts": {
+          "IFCWALL": 0,
+          "IFCBEAM": 0,
+          "IFCCOLUMN": 0,
+          "IFCSLAB": 0,
+          "IFCFOOTING": 0,
+          "IFCPILE": 0,
+          "IFCREINFORCINGELEMENT": 0,
+          "IFCDOOR": 0,
+          "IFCWINDOW": 0,
+          "IFCROOF": 0,
+          "IFCSTAIR": 0,
+          "IFCRAMP": 0,
+          "IFCRAILING": 0,
+          "IFCBRIDGE": 0,
+          "IFCROAD": 0,
+          "IFCRAIL": 0,
+          "IFCTUNNEL": 0,
+          "IFCPAVEMENT": 0,
+          "IFCKERB": 0,
+          "IFCSIGN": 0,
+          "IFCDUCT": 0,
+          "IFCPIPE": 25,
+          "IFCPUMP": 0,
+          "IFCFAN": 0,
+          "IFCBOILER": 0,
+          "IFCCHILLER": 0,
+          "IFCVALVE": 0,
+          "IFCFLOWCONTROLLER": 0,
+          "IFCFLOWTERMINAL": 0,
+          "IFCSPACE": 0,
+          "IFCZONE": 0,
+          "IFCBUILDING": 5,
+          "IFCSITE": 6,
+          "IFCBUILDINGSTOREY": 0,
+          "IFCFURNISHINGELEMENT": 0,
+          "IFCDISTRIBUTIONELEMENT": 0,
+          "IFCPROXY": 0,
+          "IFCBUILDINGELEMENTPROXY": 2
+        },
+        "total_elements": 38,
+        "structural_elements": 0,
+        "infrastructure_elements": 0,
+        "mep_elements": 25,
+        "element_distribution": {
+          "structural_percentage": 0.0,
+          "infrastructure_percentage": 0.0,
+          "mep_percentage": 65.78947368421053
+        }
+      },
+      "spatial_analysis": {
+        "spatial_elements": {
+          "projects": 1,
+          "sites": 6,
+          "buildings": 3,
+          "storeys": 0,
+          "spaces": 0,
+          "zones": 0
+        },
+        "relationships": {
+          "aggregates": 5,
+          "spatial_containment": 5
+        },
+        "hierarchy_depth": 3,
+        "spatial_complexity": 0.75
+      },
+      "property_analysis": {
+        "property_sets": 0,
+        "element_quantities": 0,
+        "single_properties": 0,
+        "common_psets_coverage": {
+          "Pset_WallCommon": 0,
+          "Pset_BeamCommon": 0,
+          "Pset_ColumnCommon": 0,
+          "Pset_SlabCommon": 0,
+          "Pset_FootingCommon": 0,
+          "Pset_PileCommon": 0,
+          "Pset_BridgeCommon": 0,
+          "Pset_RoadCommon": 0,
+          "Pset_RailCommon": 0
+        },
+        "property_density": 0.0
+      },
+      "geometry_analysis": {
+        "geometry_types": {
+          "swept_solids": 0,
+          "brep_geometry": 0,
+          "mesh_geometry": 35,
+          "curve_geometry": 0,
+          "points": 37,
+          "directions": 74
+        },
+        "total_geometry_objects": 146,
+        "geometry_complexity": 0.31575342465753425,
+        "coordinate_system_analysis": {
+          "unit_assignments": 1,
+          "si_units": 3,
+          "uses_metric": true,
+          "uses_imperial": false,
+          "coordinate_systems": 37
+        }
+      },
+      "schema_validation": {
+        "schema_version": "IFC4",
+        "validation_checks": {
+          "has_header": true,
+          "has_schema": true,
+          "has_project": true,
+          "proper_ending": true,
+          "entity_consistency": 0.8
+        },
+        "validation_score": 0.96,
+        "schema_compliance": true
+      },
+      "engineering_classification": {
+        "domain_scores": {
+          "building_architecture": 0,
+          "building_structural": 0,
+          "building_mep": 2,
+          "infrastructure_transport": 0,
+          "infrastructure_utilities": 3,
+          "civil_works": 0
+        },
+        "primary_domain": "infrastructure_utilities",
+        "confidence": 0.6,
+        "complexity_level": "moderate"
+      },
+      "quality_metrics": {
+        "completeness_score": 0.7954545454545454,
+        "consistency_score": 0.8,
+        "richness_score": 0.45454545454545453,
+        "overall_quality": 0.6945454545454545,
+        "entity_count": 440,
+        "geometric_coverage": 0.07954545454545454
+      }
+    },
+    "metadata": {
+      "domain": "infrastructure_utilities",
+      "complexity": "moderate",
+      "element_count": 38,
+      "quality_score": 0.6945454545454545,
+      "spatial_hierarchy": {
+        "projects": 1,
+        "sites": 6,
+        "buildings": 3,
+        "storeys": 0,
+        "spaces": 0,
+        "zones": 0
+      },
+      "recommended_training_weight": 0.8334545454545453,
+      "suitable_for_validation": false,
+      "training_tags": [
+        "infrastructure_utilities",
+        "complexity_moderate",
+        "mep_systems",
+        "medium_quality"
+      ]
+    }
+  },
+  {
+    "file": "Infra-Rail.ifc",
+    "analysis": {
+      "file_path": "training_data\\ifc_models\\reference\\infrastructure\\Infra-Rail.ifc",
+      "file_size": 245509,
+      "element_analysis": {
+        "element_counts": {
+          "IFCWALL": 0,
+          "IFCBEAM": 0,
+          "IFCCOLUMN": 0,
+          "IFCSLAB": 0,
+          "IFCFOOTING": 0,
+          "IFCPILE": 0,
+          "IFCREINFORCINGELEMENT": 0,
+          "IFCDOOR": 0,
+          "IFCWINDOW": 0,
+          "IFCROOF": 0,
+          "IFCSTAIR": 0,
+          "IFCRAMP": 0,
+          "IFCRAILING": 0,
+          "IFCBRIDGE": 0,
+          "IFCROAD": 0,
+          "IFCRAIL": 0,
+          "IFCTUNNEL": 0,
+          "IFCPAVEMENT": 0,
+          "IFCKERB": 0,
+          "IFCSIGN": 0,
+          "IFCDUCT": 0,
+          "IFCPIPE": 0,
+          "IFCPUMP": 0,
+          "IFCFAN": 0,
+          "IFCBOILER": 0,
+          "IFCCHILLER": 0,
+          "IFCVALVE": 0,
+          "IFCFLOWCONTROLLER": 0,
+          "IFCFLOWTERMINAL": 0,
+          "IFCSPACE": 0,
+          "IFCZONE": 0,
+          "IFCBUILDING": 81,
+          "IFCSITE": 6,
+          "IFCBUILDINGSTOREY": 2,
+          "IFCFURNISHINGELEMENT": 0,
+          "IFCDISTRIBUTIONELEMENT": 0,
+          "IFCPROXY": 0,
+          "IFCBUILDINGELEMENTPROXY": 77
+        },
+        "total_elements": 166,
+        "structural_elements": 0,
+        "infrastructure_elements": 0,
+        "mep_elements": 0,
+        "element_distribution": {
+          "structural_percentage": 0.0,
+          "infrastructure_percentage": 0.0,
+          "mep_percentage": 0.0
+        }
+      },
+      "spatial_analysis": {
+        "spatial_elements": {
+          "projects": 1,
+          "sites": 6,
+          "buildings": 2,
+          "storeys": 2,
+          "spaces": 0,
+          "zones": 0
+        },
+        "relationships": {
+          "aggregates": 6,
+          "spatial_containment": 4
+        },
+        "hierarchy_depth": 4,
+        "spatial_complexity": 0.7878787878787878
+      },
+      "property_analysis": {
+        "property_sets": 0,
+        "element_quantities": 0,
+        "single_properties": 0,
+        "common_psets_coverage": {
+          "Pset_WallCommon": 0,
+          "Pset_BeamCommon": 0,
+          "Pset_ColumnCommon": 0,
+          "Pset_SlabCommon": 0,
+          "Pset_FootingCommon": 0,
+          "Pset_PileCommon": 0,
+          "Pset_BridgeCommon": 0,
+          "Pset_RoadCommon": 0,
+          "Pset_RailCommon": 0
+        },
+        "property_density": 0.0
+      },
+      "geometry_analysis": {
+        "geometry_types": {
+          "swept_solids": 0,
+          "brep_geometry": 0,
+          "mesh_geometry": 6,
+          "curve_geometry": 0,
+          "points": 84,
+          "directions": 168
+        },
+        "total_geometry_objects": 258,
+        "geometry_complexity": 0.12093023255813955,
+        "coordinate_system_analysis": {
+          "unit_assignments": 1,
+          "si_units": 3,
+          "uses_metric": true,
+          "uses_imperial": false,
+          "coordinate_systems": 84
+        }
+      },
+      "schema_validation": {
+        "schema_version": "IFC4",
+        "validation_checks": {
+          "has_header": true,
+          "has_schema": true,
+          "has_project": true,
+          "proper_ending": true,
+          "entity_consistency": 0.8
+        },
+        "validation_score": 0.96,
+        "schema_compliance": true
+      },
+      "engineering_classification": {
+        "domain_scores": {
+          "building_architecture": 0,
+          "building_structural": 0,
+          "building_mep": 0,
+          "infrastructure_transport": 3,
+          "infrastructure_utilities": 0,
+          "civil_works": 0
+        },
+        "primary_domain": "infrastructure_transport",
+        "confidence": 1.0,
+        "complexity_level": "moderate"
+      },
+      "quality_metrics": {
+        "completeness_score": 0.08241758241758242,
+        "consistency_score": 0.8,
+        "richness_score": 0.27472527472527475,
+        "overall_quality": 0.35538461538461535,
+        "entity_count": 728,
+        "geometric_coverage": 0.008241758241758242
+      }
+    },
+    "metadata": {
+      "domain": "infrastructure_transport",
+      "complexity": "moderate",
+      "element_count": 166,
+      "quality_score": 0.35538461538461535,
+      "spatial_hierarchy": {
+        "projects": 1,
+        "sites": 6,
+        "buildings": 2,
+        "storeys": 2,
+        "spaces": 0,
+        "zones": 0
+      },
+      "recommended_training_weight": 0.4264615384615384,
+      "suitable_for_validation": false,
+      "training_tags": [
+        "infrastructure_transport",
+        "complexity_moderate",
+        "low_quality"
+      ]
+    }
+  },
+  {
+    "file": "Infra-Road.ifc",
+    "analysis": {
+      "file_path": "training_data\\ifc_models\\reference\\infrastructure\\Infra-Road.ifc",
+      "file_size": 440143,
+      "element_analysis": {
+        "element_counts": {
+          "IFCWALL": 0,
+          "IFCBEAM": 0,
+          "IFCCOLUMN": 0,
+          "IFCSLAB": 44,
+          "IFCFOOTING": 0,
+          "IFCPILE": 0,
+          "IFCREINFORCINGELEMENT": 0,
+          "IFCDOOR": 0,
+          "IFCWINDOW": 0,
+          "IFCROOF": 0,
+          "IFCSTAIR": 0,
+          "IFCRAMP": 0,
+          "IFCRAILING": 0,
+          "IFCBRIDGE": 0,
+          "IFCROAD": 0,
+          "IFCRAIL": 0,
+          "IFCTUNNEL": 0,
+          "IFCPAVEMENT": 0,
+          "IFCKERB": 0,
+          "IFCSIGN": 0,
+          "IFCDUCT": 0,
+          "IFCPIPE": 0,
+          "IFCPUMP": 0,
+          "IFCFAN": 0,
+          "IFCBOILER": 0,
+          "IFCCHILLER": 0,
+          "IFCVALVE": 0,
+          "IFCFLOWCONTROLLER": 0,
+          "IFCFLOWTERMINAL": 0,
+          "IFCSPACE": 0,
+          "IFCZONE": 0,
+          "IFCBUILDING": 33,
+          "IFCSITE": 6,
+          "IFCBUILDINGSTOREY": 20,
+          "IFCFURNISHINGELEMENT": 0,
+          "IFCDISTRIBUTIONELEMENT": 0,
+          "IFCPROXY": 0,
+          "IFCBUILDINGELEMENTPROXY": 2
+        },
+        "total_elements": 105,
+        "structural_elements": 44,
+        "infrastructure_elements": 0,
+        "mep_elements": 0,
+        "element_distribution": {
+          "structural_percentage": 41.904761904761905,
+          "infrastructure_percentage": 0.0,
+          "mep_percentage": 0.0
+        }
+      },
+      "spatial_analysis": {
+        "spatial_elements": {
+          "projects": 1,
+          "sites": 6,
+          "buildings": 11,
+          "storeys": 20,
+          "spaces": 0,
+          "zones": 0
+        },
+        "relationships": {
+          "aggregates": 17,
+          "spatial_containment": 10
+        },
+        "hierarchy_depth": 4,
+        "spatial_complexity": 0.6885964912280702
+      },
+      "property_analysis": {
+        "property_sets": 32,
+        "element_quantities": 26,
+        "single_properties": 64,
+        "common_psets_coverage": {
+          "Pset_WallCommon": 0,
+          "Pset_BeamCommon": 0,
+          "Pset_ColumnCommon": 0,
+          "Pset_SlabCommon": 32,
+          "Pset_FootingCommon": 0,
+          "Pset_PileCommon": 0,
+          "Pset_BridgeCommon": 0,
+          "Pset_RoadCommon": 0,
+          "Pset_RailCommon": 0
+        },
+        "property_density": 2.0
+      },
+      "geometry_analysis": {
+        "geometry_types": {
+          "swept_solids": 0,
+          "brep_geometry": 0,
+          "mesh_geometry": 38,
+          "curve_geometry": 0,
+          "points": 91,
+          "directions": 182
+        },
+        "total_geometry_objects": 311,
+        "geometry_complexity": 0.209967845659164,
+        "coordinate_system_analysis": {
+          "unit_assignments": 1,
+          "si_units": 3,
+          "uses_metric": true,
+          "uses_imperial": false,
+          "coordinate_systems": 91
+        }
+      },
+      "schema_validation": {
+        "schema_version": "IFC4",
+        "validation_checks": {
+          "has_header": true,
+          "has_schema": true,
+          "has_project": true,
+          "proper_ending": true,
+          "entity_consistency": 0.8
+        },
+        "validation_score": 0.96,
+        "schema_compliance": true
+      },
+      "engineering_classification": {
+        "domain_scores": {
+          "building_architecture": 0,
+          "building_structural": 0,
+          "building_mep": 0,
+          "infrastructure_transport": 3,
+          "infrastructure_utilities": 0,
+          "civil_works": 0
+        },
+        "primary_domain": "infrastructure_transport",
+        "confidence": 1.0,
+        "complexity_level": "complex"
+      },
+      "quality_metrics": {
+        "completeness_score": 0.32040472175379425,
+        "consistency_score": 0.8,
+        "richness_score": 0.9949409780775716,
+        "overall_quality": 0.6666441821247892,
+        "entity_count": 1186,
+        "geometric_coverage": 0.03204047217537943
+      }
+    },
+    "metadata": {
+      "domain": "infrastructure_transport",
+      "complexity": "complex",
+      "element_count": 105,
+      "quality_score": 0.6666441821247892,
+      "spatial_hierarchy": {
+        "projects": 1,
+        "sites": 6,
+        "buildings": 11,
+        "storeys": 20,
+        "spaces": 0,
+        "zones": 0
+      },
+      "recommended_training_weight": 0.9999662731871837,
+      "suitable_for_validation": false,
+      "training_tags": [
+        "infrastructure_transport",
+        "complexity_complex",
+        "medium_quality"
+      ]
+    }
+  }
+]

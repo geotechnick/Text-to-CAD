@@ -98,7 +98,7 @@ python quick_train.py
 
 #### Basic Training
 ```bash
-# Train with default settings
+# Train with default settings (includes buildingSMART reference models)
 python train_model.py --mode full --epochs 10
 
 # Train individual agents
@@ -106,8 +106,17 @@ python train_model.py --mode prompt_parser --epochs 5
 python train_model.py --mode file_analyzer --epochs 5
 python train_model.py --mode ifc_generator --epochs 5
 
-# Validate existing system
+# Validate existing system with IFC reference models
 python train_model.py --mode validate --test-cases
+
+# Analyze buildingSMART sample IFC files
+python analyze_ifc_samples.py
+
+# Generate IDS-based training data
+python generate_ids_training_data.py
+
+# Test IDS integration
+python test_ids_integration.py
 ```
 
 ### Training Data Structure
@@ -118,15 +127,33 @@ The training system automatically creates and manages data:
 training_data/
 ├── prompts/
 │   ├── sample_prompts.json          # Manual training prompts
-│   └── quick_train_prompts.json     # Auto-generated samples
+│   ├── quick_train_prompts.json     # Auto-generated samples
+│   ├── ids_compliance_prompts.json  # IDS-based training prompts
+│   ├── ids_architectural_prompts.json # Domain-specific IDS prompts
+│   └── ids_structural_prompts.json  # Structural IDS prompts
 ├── files/
 │   ├── excel/                       # Excel engineering files
 │   ├── pdf/                         # PDF calculations
 │   ├── geostudio/                   # GeoStudio analysis files
 │   └── staad_pro/                   # STAAD.Pro structural files
 ├── ifc_models/
-│   ├── reference/                   # Reference IFC models
+│   ├── reference/                   # buildingSMART reference IFC models
+│   │   ├── building/                # Building domain IFC files
+│   │   │   ├── Building-Architecture.ifc
+│   │   │   ├── Building-Structural.ifc
+│   │   │   ├── Building-Hvac.ifc
+│   │   │   └── Building-Landscaping.ifc
+│   │   └── infrastructure/          # Infrastructure domain IFC files
+│   │       ├── Infra-Bridge.ifc
+│   │       ├── Infra-Road.ifc
+│   │       ├── Infra-Rail.ifc
+│   │       ├── Infra-Plumbing.ifc
+│   │       └── Infra-Landscaping.ifc
 │   └── validation/                  # Validation models
+├── ids_specifications/              # IDS compliance specifications
+│   ├── IDS_Aedes_example.ids        # Architectural compliance example
+│   ├── IDS_StructuralSafety.ids     # Structural safety requirements
+│   └── IDS_aachen_example.ids       # General attribute requirements
 └── synthetic/
     └── generated_prompts.json       # Auto-generated synthetic data
 ```
@@ -221,6 +248,7 @@ python train_model.py \
 #### 1. **Data Preparation** (Automatic)
 - **Load Existing Data**: Scans for engineering files and prompts
 - **Generate Synthetic Data**: Creates realistic engineering scenarios
+- **Load IDS Training Data**: Industry-standard compliance examples from buildingSMART
 - **Data Augmentation**: Parameter variations, unit conversions
 - **Train/Val/Test Split**: Automatic data splitting (70/20/10)
 
@@ -233,6 +261,8 @@ python train_model.py \
 #### 3. **Validation & Testing** (Comprehensive)
 - **Component Testing**: Individual agent performance validation
 - **Integration Testing**: End-to-end system validation
+- **IFC Analysis**: Professional reference model quality assessment using buildingSMART samples
+- **IDS Compliance**: Validation against Information Delivery Specifications
 - **Engineering Validation**: Code compliance and structural soundness
 - **Performance Testing**: Speed and resource usage optimization
 
@@ -266,6 +296,28 @@ Create `training_data/prompts/engineering_prompts.json`:
   ]
 }
 ```
+
+#### buildingSMART Reference IFC Models
+The training system includes professional IFC models from buildingSMART for reference learning:
+
+**Building Domain Models:**
+- **Building-Architecture.ifc**: Multi-story building with walls, doors, windows, and spaces
+- **Building-Structural.ifc**: Structural framework with beams, columns, slabs, and foundations  
+- **Building-Hvac.ifc**: HVAC system with ducts, air handling units, and ventilation
+- **Building-Landscaping.ifc**: Landscaping elements with planted areas and outdoor spaces
+
+**Infrastructure Domain Models:**
+- **Infra-Bridge.ifc**: Bridge structure with deck, supports, and abutments
+- **Infra-Road.ifc**: Road infrastructure with roadway elements and intersections
+- **Infra-Rail.ifc**: Railway infrastructure with tracks, platforms, and signals
+- **Infra-Plumbing.ifc**: Plumbing system with pipes, fixtures, and water management
+- **Infra-Landscaping.ifc**: Infrastructure landscaping and site development
+
+These reference models provide:
+- **Domain-Specific Training**: Real-world examples for each engineering discipline
+- **Quality Benchmarks**: Professional-grade IFC structure and content
+- **Reverse-Engineered Prompts**: Automatically generated training prompts from IFC analysis
+- **Validation Standards**: Reference models for testing generation quality
 
 #### Automatic Synthetic Data
 The system generates 1000+ synthetic examples like:
@@ -323,10 +375,47 @@ with open('models/logs/training_history.json') as f:
 "
 ```
 
-#### Continuous Improvement
+#### IDS Compliance Integration
+
+The training system includes comprehensive **Information Delivery Specification (IDS)** support:
+
+#### **What is IDS?**
+IDS is a buildingSMART standard for defining and validating information requirements in BIM models:
+- **Specification Definition**: What information must be delivered and when
+- **Automated Validation**: Computer-interpretable requirements checking
+- **Industry Standards**: Compliance with professional delivery requirements
+- **Quality Assurance**: Systematic validation of model completeness and accuracy
+
+#### **IDS Integration Features**
+- **13+ Training Examples**: Generated from buildingSMART IDS specifications
+- **Domain Coverage**: Architectural, structural, and general engineering domains
+- **Automated Validation**: Real-time IDS compliance checking during IFC generation
+- **Training Data**: IDS-based prompts for compliance-focused training
+- **Professional Standards**: Integration with industry-standard specifications
+
+#### **IDS Training Process**
+```bash
+# Generate IDS training data from buildingSMART examples
+python generate_ids_training_data.py
+
+# Train with IDS compliance focus
+python train_model.py --mode full --use-ids-prompts
+
+# Validate IDS compliance
+python train_model.py --mode validate --test-ids-compliance
+```
+
+#### **IDS Compliance Metrics**
+- **Compliance Rate**: Percentage of generated models meeting IDS requirements
+- **Specification Coverage**: Number of IDS specifications validated against
+- **Domain Accuracy**: Compliance rates by engineering domain
+- **Validation Performance**: Speed and accuracy of IDS validation process
+
+### Continuous Improvement
 - **Incremental Training**: Add new data without retraining from scratch
 - **Performance Optimization**: Automatic parameter tuning
 - **Quality Assessment**: Engineering accuracy validation
+- **IDS Compliance Monitoring**: Real-time validation against industry standards
 - **Production Monitoring**: Real-time performance tracking
 
 ## 🚀 Features
@@ -335,6 +424,7 @@ with open('models/logs/training_history.json') as f:
 - **Natural Language Processing**: Parse engineering prompts with domain-specific understanding
 - **Multi-Format File Analysis**: Support for Excel, PDF, GeoStudio, STAAD.Pro, and other engineering file formats
 - **IFC Generation**: Generate compliant IFC4 models with proper spatial hierarchy and properties
+- **IDS Compliance Validation**: Industry-standard Information Delivery Specification validation using buildingSMART standards
 - **Intelligent Workflow Orchestration**: Adaptive workflow management based on project complexity
 - **Real-time Performance Monitoring**: Comprehensive metrics and optimization suggestions
 - **Continuous Learning**: Automated model updates and performance monitoring
@@ -785,6 +875,59 @@ class BaseAgent:
 - **File Processing**: `PyPDF2`, `pdfplumber`, `Pillow`
 - **Performance**: `cython`, `numba`, `memory-profiler`
 - **Engineering**: Custom libraries for structural analysis
+
+### Training and Analysis Programs
+
+#### `src/training/ifc_analyzer.py` (680+ lines)
+**Purpose**: Professional IFC analysis tools for training validation and quality assessment
+
+**Key Features**:
+- **Comprehensive IFC Analysis**: Element counting, spatial hierarchy, properties, geometry analysis
+- **Domain Classification**: Automatic classification of engineering domains (building, infrastructure, MEP)
+- **Quality Metrics**: Schema validation, completeness, consistency, and richness scoring  
+- **buildingSMART Integration**: Analysis of professional reference models for training benchmarks
+- **Training Metadata Generation**: Automatic generation of training weights and tags
+- **Reverse Engineering**: Generate training prompts from existing IFC models
+
+**Analysis Capabilities**:
+- Element analysis across 25+ IFC types (walls, beams, bridges, roads, MEP systems)
+- Spatial structure validation (projects, sites, buildings, storeys, spaces)
+- Geometry complexity assessment (swept solids, BREP, mesh, curves)
+- Property set coverage and density analysis
+- Engineering domain classification with confidence scoring
+- Quality assessment for training suitability and validation benchmarking
+
+#### `src/training/ids_parser.py` (550+ lines)
+**Purpose**: Information Delivery Specification (IDS) parser and analyzer for industry compliance
+
+**Key Components**:
+- **IDS Document Parser**: Complete XML parsing of buildingSMART IDS specifications
+- **Specification Analysis**: Entity, property, classification, material, and attribute facets
+- **Validation Framework**: Schema validation and compliance checking
+- **Domain Classification**: Automatic engineering domain detection
+- **Training Integration**: Generate training examples from IDS specifications
+
+**Supported IDS Features**:
+- All IDS facet types (entity, property, classification, material, attribute, partOf)
+- IFC version compatibility (IFC2X3, IFC4, IFC4X3)
+- Restriction patterns (regex, enumeration, numeric ranges)
+- Cardinality specifications (required, optional, prohibited)
+
+#### `src/training/ids_validator.py` (480+ lines)
+**Purpose**: IFC model validation against IDS specifications for compliance verification
+
+**Validation Capabilities**:
+- **IFC-to-IDS Validation**: Validate generated IFC models against IDS specifications
+- **Compliance Reporting**: Detailed compliance reports with pass/fail results
+- **Training Example Generation**: Convert IDS specifications to training prompts
+- **Multi-Specification Support**: Validate against multiple IDS files simultaneously
+- **Performance Metrics**: Compliance rates, validation coverage, and quality scores
+
+**Industry Integration**:
+- buildingSMART IDS standard compliance
+- Professional delivery specification validation
+- Real-time compliance checking during model generation
+- Training data generation from industry standards
 
 ### Documentation Programs
 

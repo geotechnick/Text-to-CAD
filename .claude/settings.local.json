@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(git clone:*)",
+      "Bash(mkdir:*)",
+      "Bash(copy \"sample_ifc_files\\IFC 4.0.2.1 (IFC 4)\\PCERT-Sample-Scene\\Building-*.ifc\" \"training_data\\ifc_models\\reference\\building\"\")",
+      "Bash(cp:*)",
+      "Bash(python:*)"
     ],
     "deny": []
   }
