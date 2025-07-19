@@ -85,216 +85,249 @@ python -m src.main --monitor --duration 3600  # Monitor for 1 hour
 
 ## 🤖 Training the Multi-Agent Model
 
-### Training Data Requirements
+### Quick Start Training
 
-#### 1. Engineering Prompt Dataset
-Create training data for the prompt parser:
+#### Test the System First
+```bash
+# Test individual components
+python quick_train.py --test-components
+
+# Run quick training demo (3 epochs, ~2 minutes)
+python quick_train.py
+```
+
+#### Basic Training
+```bash
+# Train with default settings
+python train_model.py --mode full --epochs 10
+
+# Train individual agents
+python train_model.py --mode prompt_parser --epochs 5
+python train_model.py --mode file_analyzer --epochs 5
+python train_model.py --mode ifc_generator --epochs 5
+
+# Validate existing system
+python train_model.py --mode validate --test-cases
+```
+
+### Training Data Structure
+
+The training system automatically creates and manages data:
+
+```
+training_data/
+├── prompts/
+│   ├── sample_prompts.json          # Manual training prompts
+│   └── quick_train_prompts.json     # Auto-generated samples
+├── files/
+│   ├── excel/                       # Excel engineering files
+│   ├── pdf/                         # PDF calculations
+│   ├── geostudio/                   # GeoStudio analysis files
+│   └── staad_pro/                   # STAAD.Pro structural files
+├── ifc_models/
+│   ├── reference/                   # Reference IFC models
+│   └── validation/                  # Validation models
+└── synthetic/
+    └── generated_prompts.json       # Auto-generated synthetic data
+```
+
+### Training Configuration
+
+#### Comprehensive Configuration (`training_config.yaml`)
+```yaml
+system:
+  max_workers: 8
+  cache_size: 100
+  timeout: 300
+
+training:
+  epochs: 20                    # Number of training epochs
+  batch_size: 8                # Training batch size
+  learning_rate: 0.001         # Learning rate
+  validation_split: 0.2        # Validation data percentage
+  early_stopping: true         # Stop when no improvement
+  patience: 5                  # Early stopping patience
+  save_checkpoints: true       # Save training checkpoints
+  checkpoint_interval: 5       # Save every N epochs
+
+agents:
+  prompt_parser:
+    model_type: "engineering_bert"
+    vocab_size: 50000
+    enable_augmentation: true
+    
+  file_analyzer:
+    max_workers: 4
+    chunk_size: 1024
+    supported_formats: ["xlsx", "pdf", "gsz", "gp12a"]
+    
+  ifc_generator:
+    template_library: "templates/civil_engineering.json"
+    geometry_cache_size: 1000
+    ifc_schema: "IFC4"
+
+data:
+  generate_synthetic: true      # Auto-generate training data
+  synthetic_count: 1000        # Number of synthetic examples
+  augmentation_factor: 3       # Data augmentation multiplier
+```
+
+### Advanced Training Commands
+
+#### Full Training Pipeline
+```bash
+# Complete training with configuration
+python train_model.py \
+    --config training_config.yaml \
+    --mode full \
+    --epochs 20 \
+    --generate-synthetic \
+    --synthetic-count 1000
+
+# Large-scale training
+python train_model.py \
+    --mode full \
+    --epochs 50 \
+    --batch-size 16 \
+    --synthetic-count 5000 \
+    --save-checkpoints \
+    --early-stopping
+```
+
+#### Specialized Training
+```bash
+# Focus on prompt understanding
+python train_model.py \
+    --mode prompt_parser \
+    --epochs 15 \
+    --learning-rate 0.0001 \
+    --validation-split 0.3
+
+# Optimize file processing
+python train_model.py \
+    --mode file_analyzer \
+    --data-dir "engineering files" \
+    --epochs 10
+
+# Improve IFC generation
+python train_model.py \
+    --mode ifc_generator \
+    --epochs 20 \
+    --batch-size 4
+```
+
+### Training Process Overview
+
+#### 1. **Data Preparation** (Automatic)
+- **Load Existing Data**: Scans for engineering files and prompts
+- **Generate Synthetic Data**: Creates realistic engineering scenarios
+- **Data Augmentation**: Parameter variations, unit conversions
+- **Train/Val/Test Split**: Automatic data splitting (70/20/10)
+
+#### 2. **Agent Training** (Parallel)
+- **Prompt Parser**: Engineering language understanding and parameter extraction
+- **File Analyzer**: Multi-format engineering file processing
+- **IFC Generator**: 3D model generation with proper IFC hierarchy
+- **System Integration**: End-to-end workflow optimization
+
+#### 3. **Validation & Testing** (Comprehensive)
+- **Component Testing**: Individual agent performance validation
+- **Integration Testing**: End-to-end system validation
+- **Engineering Validation**: Code compliance and structural soundness
+- **Performance Testing**: Speed and resource usage optimization
+
+#### 4. **Results & Analysis** (Automated)
+- **Training Metrics**: Accuracy, completion rates, generation quality
+- **Performance Plots**: Training curves and progress visualization
+- **Validation Reports**: Detailed analysis with recommendations
+- **Model Checkpoints**: Best model versions saved automatically
+
+### Training Data Sources
+
+#### Manual Training Data
+Create `training_data/prompts/engineering_prompts.json`:
 ```json
 {
   "prompts": [
     {
-      "text": "Design a reinforced concrete floodwall 4.2m high",
+      "text": "Design a reinforced concrete floodwall 4.2m high and 850m long with micropile foundation",
       "intent": "complex_infrastructure",
       "parameters": [
         {"name": "height", "value": 4.2, "unit": "m", "confidence": 0.95},
-        {"name": "material", "value": "reinforced_concrete", "confidence": 0.9}
+        {"name": "length", "value": 850.0, "unit": "m", "confidence": 0.95},
+        {"name": "material", "value": "reinforced_concrete", "confidence": 0.9},
+        {"name": "foundation_type", "value": "micropile", "confidence": 0.85}
       ],
       "constraints": [
-        {"type": "structural", "requirement": "flood_protection"}
+        {"type": "flood_protection", "requirement": "500_year_protection"},
+        {"type": "safety", "requirement": "factor_of_safety_2.0"}
       ]
     }
   ]
 }
 ```
 
-#### 2. Engineering File Dataset
-Prepare training files:
+#### Automatic Synthetic Data
+The system generates 1000+ synthetic examples like:
+- "Design a steel beam 8m long for 150kN load capacity"
+- "Create a foundation system for 25 gpm pump with concrete pad"
+- "Build a retaining wall 3.5m high for earthquake zone 4"
+
+### Training Outputs
+
+#### Model Files
 ```
-training_data/
-├── excel_files/
-│   ├── structural_calculations/
-│   ├── load_analysis/
-│   └── material_properties/
-├── pdf_documents/
-│   ├── design_reports/
-│   └── calculation_sheets/
-├── analysis_files/
-│   ├── geostudio/
-│   └── staad_pro/
-└── ifc_models/
-    ├── reference_models/
-    └── validation_models/
+models/
+├── checkpoints/
+│   ├── best_model/              # Best performing model
+│   ├── checkpoint_epoch_5/      # Regular checkpoints
+│   └── checkpoint_epoch_10/
+├── logs/
+│   └── training_history.json    # Complete training history
+└── plots/
+    └── training_curves.png      # Performance visualization
 ```
 
-### Training Process
+#### Training Reports
+- **Accuracy Metrics**: Component and system-wide performance
+- **Engineering Validation**: Code compliance and structural soundness
+- **Performance Analysis**: Speed, memory usage, scalability
+- **Recommendations**: Suggestions for improvement and optimization
 
-#### 1. Prepare Training Environment
+### Performance Expectations
+
+#### Training Performance
+- **Quick Training**: 3 epochs, ~2 minutes (demo purposes)
+- **Basic Training**: 10 epochs, ~15 minutes (testing)
+- **Full Training**: 20-50 epochs, 1-3 hours (production)
+
+#### Model Performance Targets
+- **Prompt Parser Accuracy**: 85%+ engineering language understanding
+- **File Analysis Success**: 80%+ multi-format file processing
+- **IFC Generation Quality**: 90%+ valid IFC model creation
+- **End-to-End Completion**: 75%+ successful prompt-to-IFC workflows
+
+### Monitoring & Optimization
+
+#### Real-time Monitoring
 ```bash
-# Create training environment
-python -m src.training.setup_training_env
-
-# Validate training data
-python -m src.training.validate_data --data-dir training_data/
-```
-
-#### 2. Train Individual Agents
-```bash
-# Train the prompt parser
-python -m src.training.train_prompt_parser \
-    --data training_data/prompts.json \
-    --epochs 100 \
-    --batch-size 32 \
-    --output models/prompt_parser_v1.pkl
-
-# Train the file analyzer
-python -m src.training.train_file_analyzer \
-    --data training_data/files/ \
-    --output models/file_analyzer_v1.pkl
-
-# Train the IFC generator
-python -m src.training.train_ifc_generator \
-    --data training_data/ifc_models/ \
-    --templates templates/ifc_templates.json \
-    --output models/ifc_generator_v1.pkl
-```
-
-#### 3. End-to-End Training
-```bash
-# Train the complete system
-python -m src.training.train_system \
-    --config training_config.yaml \
-    --data training_data/ \
-    --epochs 50 \
-    --validation-split 0.2 \
-    --output models/system_v1/
-
 # Monitor training progress
-tensorboard --logdir training_logs/
+tail -f training.log
+
+# View training metrics in real-time
+python -c "
+import json
+with open('models/logs/training_history.json') as f:
+    data = json.load(f)
+    print(f'Latest accuracy: {data[\"validation_history\"][-1][\"accuracy\"]:.3f}')
+"
 ```
 
-### Training Configuration
-
-#### `training_config.yaml`
-```yaml
-system:
-  max_workers: 16
-  batch_size: 8
-  learning_rate: 0.001
-  epochs: 50
-
-agents:
-  prompt_parser:
-    model_type: "engineering_bert"
-    vocab_size: 50000
-    embedding_dim: 768
-    
-  file_analyzer:
-    parsers:
-      - excel
-      - pdf
-      - geostudio
-      - staad_pro
-    chunk_size: 1024
-    
-  ifc_generator:
-    template_library: "templates/civil_engineering.json"
-    geometry_cache_size: 1000
-    
-training:
-  validation_split: 0.2
-  early_stopping: true
-  save_checkpoints: true
-  checkpoint_interval: 10
-```
-
-### Training Data Generation
-
-#### Automated Data Generation
-```python
-# Generate synthetic training data
-python -m src.training.generate_synthetic_data \
-    --output training_data/synthetic/ \
-    --count 10000 \
-    --types floodwall,retaining_wall,foundation,pile_system
-
-# Augment existing data
-python -m src.training.augment_data \
-    --input training_data/real/ \
-    --output training_data/augmented/ \
-    --augmentation-factor 5
-```
-
-#### Active Learning Pipeline
-```python
-# Identify challenging examples for human annotation
-python -m src.training.active_learning \
-    --model models/system_v1/ \
-    --unlabeled-data unlabeled_prompts.json \
-    --output annotation_queue.json \
-    --strategy uncertainty_sampling
-```
-
-### Model Evaluation & Validation
-
-#### Performance Metrics
-```bash
-# Evaluate system performance
-python -m src.evaluation.evaluate_system \
-    --model models/system_v1/ \
-    --test-data test_data/ \
-    --metrics accuracy,precision,recall,f1,processing_time
-
-# Engineering-specific validation
-python -m src.evaluation.validate_engineering \
-    --model models/system_v1/ \
-    --test-cases engineering_test_cases.json \
-    --validate-structure-integrity \
-    --validate-code-compliance
-```
-
-#### Continuous Learning
-```bash
-# Update model with new data
-python -m src.training.incremental_training \
-    --base-model models/system_v1/ \
-    --new-data new_training_data/ \
-    --output models/system_v2/
-
-# A/B testing for model improvements
-python -m src.evaluation.ab_testing \
-    --model-a models/system_v1/ \
-    --model-b models/system_v2/ \
-    --test-prompts production_prompts.json
-```
-
-### Production Deployment
-
-#### Model Serving
-```bash
-# Deploy trained model
-python -m src.deployment.deploy_model \
-    --model models/system_v2/ \
-    --config production_config.yaml \
-    --port 8000
-
-# Health check
-curl http://localhost:8000/health
-```
-
-#### Monitoring & Retraining
-```bash
-# Monitor model performance in production
-python -m src.monitoring.production_monitor \
-    --model-endpoint http://localhost:8000 \
-    --metrics-interval 300 \
-    --alert-threshold 0.8
-
-# Trigger retraining when performance degrades
-python -m src.training.auto_retrain \
-    --monitor-config monitor_config.yaml \
-    --retrain-threshold 0.75 \
-    --data-pipeline data_pipeline.yaml
-```
+#### Continuous Improvement
+- **Incremental Training**: Add new data without retraining from scratch
+- **Performance Optimization**: Automatic parameter tuning
+- **Quality Assessment**: Engineering accuracy validation
+- **Production Monitoring**: Real-time performance tracking
 
 ## 🚀 Features
 

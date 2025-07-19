@@ -1,0 +1,276 @@
+# Training Configuration for Text-to-CAD Multi-Agent System
+
+system:
+  max_workers: 8
+  cache_size: 100
+  timeout: 300
+  memory_limit: "2GB"
+
+training:
+  # Basic training parameters
+  epochs: 20
+  batch_size: 8
+  learning_rate: 0.001
+  validation_split: 0.2
+  test_split: 0.1
+  
+  # Checkpointing and saving
+  save_checkpoints: true
+  checkpoint_interval: 5
+  output_dir: "models"
+  
+  # Early stopping
+  early_stopping: true
+  patience: 5
+  min_improvement: 0.001
+  
+  # Logging and monitoring
+  log_interval: 10
+  save_training_plots: true
+  
+  # Performance optimization
+  use_mixed_precision: false
+  gradient_accumulation_steps: 1
+
+agents:
+  prompt_parser:
+    # Model architecture
+    model_type: "engineering_bert"
+    vocab_size: 50000
+    embedding_dim: 768
+    hidden_dim: 512
+    num_layers: 6
+    
+    # Training parameters
+    max_workers: 2
+    learning_rate: 0.0001
+    dropout: 0.1
+    weight_decay: 0.01
+    
+    # Data augmentation
+    enable_augmentation: true
+    augmentation_factor: 3
+    synonym_replacement: true
+    unit_conversion: true
+    
+    # Specialized features
+    engineering_vocabulary: true
+    technical_term_weighting: true
+    parameter_extraction_focus: true
+
+  file_analyzer:
+    # Processing parameters
+    max_workers: 4
+    chunk_size: 1024
+    max_file_size: "100MB"
+    
+    # Parser configurations
+    excel_parser:
+      max_sheets: 20
+      max_rows_per_sheet: 10000
+      enable_formula_parsing: true
+      
+    pdf_parser:
+      enable_ocr: true
+      ocr_language: "eng"
+      table_extraction: true
+      
+    geostudio_parser:
+      supported_versions: ["2018", "2019", "2021"]
+      extract_geometry: true
+      extract_properties: true
+      
+    staad_parser:
+      extract_nodes: true
+      extract_elements: true
+      extract_loads: true
+      extract_results: true
+    
+    # Performance optimization
+    enable_parallel_processing: true
+    cache_parsed_files: true
+    cache_size: 50
+
+  ifc_generator:
+    # Template system
+    template_library: "templates/civil_engineering.json"
+    custom_templates_dir: "templates/custom"
+    template_cache_size: 100
+    
+    # Geometry generation
+    geometry_engine: "optimized"
+    geometry_cache_size: 1000
+    mesh_resolution: "medium"
+    
+    # IFC specifications
+    ifc_schema: "IFC4"
+    coordinate_system: "project_local"
+    units: "metric"
+    
+    # Element generation
+    max_elements_per_model: 10000
+    element_detail_level: "medium"
+    include_properties: true
+    include_quantities: true
+    
+    # Performance optimization
+    batch_processing: true
+    batch_size: 100
+    parallel_generation: true
+
+  orchestrator:
+    # Workflow management
+    max_workers: 8
+    workflow_timeout: 600  # 10 minutes
+    
+    # Task scheduling
+    enable_parallel_tasks: true
+    dependency_resolution: "automatic"
+    retry_failed_tasks: true
+    max_retries: 3
+    
+    # Performance monitoring
+    enable_profiling: true
+    performance_threshold: 0.8
+    auto_scaling: false
+
+data:
+  # Data generation
+  generate_synthetic: true
+  synthetic_count: 1000
+  synthetic_types:
+    - "simple_structure"
+    - "complex_infrastructure" 
+    - "retrofit_upgrade"
+  
+  # Data augmentation
+  augmentation_factor: 3
+  augmentation_methods:
+    - "parameter_variation"
+    - "unit_conversion"
+    - "synonym_replacement"
+    - "numerical_scaling"
+  
+  # Data validation
+  validate_data: true
+  data_quality_threshold: 0.8
+  
+  # File handling
+  max_file_size: "100MB"
+  supported_formats:
+    - "xlsx"
+    - "xls"
+    - "csv"
+    - "pdf"
+    - "gsz"
+    - "gsd"
+    - "gp12a"
+    - "gp12d"
+    - "txt"
+
+validation:
+  # Validation strategy
+  validation_frequency: "every_epoch"
+  comprehensive_validation_interval: 5
+  
+  # Metrics
+  primary_metric: "composite_score"
+  secondary_metrics:
+    - "accuracy"
+    - "completion_rate"
+    - "generation_quality"
+    - "processing_time"
+  
+  # Test cases
+  run_test_cases: true
+  test_case_categories:
+    - "simple_structures"
+    - "complex_infrastructure"
+    - "edge_cases"
+    - "engineering_accuracy"
+  
+  # Quality thresholds
+  minimum_accuracy: 0.7
+  minimum_completion_rate: 0.6
+  minimum_generation_quality: 0.75
+  maximum_processing_time: 60  # seconds
+
+optimization:
+  # Performance optimization
+  enable_caching: true
+  memory_optimization: true
+  cpu_optimization: true
+  
+  # Model optimization
+  model_pruning: false
+  quantization: false
+  knowledge_distillation: false
+  
+  # Hardware acceleration
+  use_gpu: false
+  gpu_memory_fraction: 0.8
+  
+  # Profiling
+  enable_profiling: false
+  profile_memory: false
+  profile_computation: false
+
+logging:
+  # Logging configuration
+  level: "INFO"
+  file: "training.log"
+  max_file_size: "10MB"
+  backup_count: 5
+  
+  # Console logging
+  console_level: "INFO"
+  show_progress: true
+  
+  # Metrics logging
+  log_metrics: true
+  metrics_interval: 100  # batches
+  
+  # Debug logging
+  debug_agents: false
+  debug_workflows: false
+  debug_performance: false
+
+monitoring:
+  # Performance monitoring
+  enable_monitoring: true
+  monitoring_interval: 30  # seconds
+  
+  # Alerts
+  enable_alerts: false
+  alert_thresholds:
+    memory_usage: 0.9
+    cpu_usage: 0.95
+    processing_time: 300
+  
+  # Metrics collection
+  collect_system_metrics: true
+  collect_agent_metrics: true
+  collect_training_metrics: true
+
+# Environment-specific settings
+environment:
+  # Development environment
+  development:
+    epochs: 5
+    batch_size: 4
+    synthetic_count: 100
+    enable_debug: true
+  
+  # Production environment  
+  production:
+    epochs: 50
+    batch_size: 16
+    synthetic_count: 5000
+    enable_monitoring: true
+    
+  # Testing environment
+  testing:
+    epochs: 2
+    batch_size: 2
+    synthetic_count: 50
+    validation_only: true

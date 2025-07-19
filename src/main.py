@@ -17,13 +17,14 @@ from .agents.prompt_parser_agent import get_prompt_parser_agent
 from .agents.file_analyzer_agent import get_file_analyzer_agent
 from .agents.ifc_generator_agent import get_ifc_generator_agent
 
-# Configure logging
+# Configure logging with UTF-8 encoding for Windows compatibility
+import sys
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('text_to_cad.log'),
-        logging.StreamHandler()
+        logging.FileHandler('text_to_cad.log', encoding='utf-8'),
+        logging.StreamHandler(sys.stdout)
     ]
 )
 
@@ -268,13 +269,13 @@ async def process_single_prompt(system: TextToCADSystem, prompt: str, files: Lis
         with open(metadata_path, "w") as f:
             json.dump(metadata, f, indent=2)
         
-        logging.info(f"✅ Generated IFC model: {ifc_path}")
-        logging.info(f"📊 Elements: {result.get('element_count', 0)}, Time: {result.get('processing_time', 0):.2f}s")
+        logging.info(f"Generated IFC model: {ifc_path}")
+        logging.info(f"Elements: {result.get('element_count', 0)}, Time: {result.get('processing_time', 0):.2f}s")
         
         return result
         
     except Exception as e:
-        logging.error(f"❌ Processing failed: {e}")
+        logging.error(f"Processing failed: {e}")
         return None
 
 async def process_batch_prompts(system: TextToCADSystem, batch_file: str, output_dir: str):
@@ -302,15 +303,15 @@ async def process_batch_prompts(system: TextToCADSystem, batch_file: str, output
         with open(batch_results_path, "w") as f:
             json.dump(results, f, indent=2)
         
-        logging.info(f"📋 Batch processing complete: {batch_results_path}")
+        logging.info(f"Batch processing complete: {batch_results_path}")
         
     except Exception as e:
-        logging.error(f"❌ Batch processing failed: {e}")
+        logging.error(f"Batch processing failed: {e}")
 
 async def monitor_system(system: TextToCADSystem, duration: int):
     """Monitor system performance"""
     
-    logging.info(f"🔍 Monitoring system for {duration} seconds...")
+    logging.info(f"Monitoring system for {duration} seconds...")
     
     start_time = time.time()
     while time.time() - start_time < duration:
@@ -322,12 +323,12 @@ async def monitor_system(system: TextToCADSystem, duration: int):
             agent_count = len(status.get("agents", {}))
             total_messages = status.get("system_metrics", {}).get("total_messages", 0)
             
-            logging.info(f"📊 Uptime: {uptime:.1f}s, Agents: {agent_count}, Messages: {total_messages}")
+            logging.info(f"Uptime: {uptime:.1f}s, Agents: {agent_count}, Messages: {total_messages}")
             
             # Check for performance issues
             suggestions = status.get("performance_analysis", [])
             if suggestions:
-                logging.warning(f"⚠️  Performance suggestions: {suggestions}")
+                logging.warning(f"Performance suggestions: {suggestions}")
             
             await asyncio.sleep(10)  # Check every 10 seconds
             
@@ -348,7 +349,7 @@ async def main():
     try:
         # Initialize system
         await system.initialize()
-        logging.info("🚀 Text-to-CAD Multi-Agent System initialized")
+        logging.info("Text-to-CAD Multi-Agent System initialized")
         
         if args.status:
             # Get and display system status
@@ -369,7 +370,7 @@ async def main():
             
         else:
             # Interactive mode - keep system running
-            logging.info("🎯 System ready for interactive use")
+            logging.info("System ready for interactive use")
             logging.info("Press Ctrl+C to shutdown")
             
             # Example usage
@@ -378,21 +379,21 @@ async def main():
                 ["engineering files/Floodwall Bearing 101+50 to 106+00.xlsx"]
             )
             
-            logging.info(f"📋 Example processing result: {result}")
+            logging.info(f"Example processing result: {result}")
             
             # Keep system running
             while True:
                 await asyncio.sleep(1)
                 
     except KeyboardInterrupt:
-        logging.info("🛑 Shutdown requested")
+        logging.info("Shutdown requested")
     except Exception as e:
-        logging.error(f"❌ System error: {e}")
+        logging.error(f"System error: {e}")
         import traceback
         traceback.print_exc()
     finally:
         await system.shutdown()
-        logging.info("👋 System shutdown complete")
+        logging.info("System shutdown complete")
 
 if __name__ == "__main__":
     # Fix Windows multiprocessing issues

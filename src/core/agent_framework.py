@@ -15,22 +15,13 @@ import logging
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 import queue
 import weakref
-import mmap
-import pickle
+import json
 from pathlib import Path
 
-# Shared memory for cross-agent communication - Initialize lazily to avoid Windows issues
-shared_memory_manager = None
-shared_data = None
-shared_queues = None
-
-def _initialize_shared_memory():
-    """Initialize shared memory components safely"""
-    global shared_memory_manager, shared_data, shared_queues
-    if shared_memory_manager is None:
-        shared_memory_manager = mp.Manager()
-        shared_data = shared_memory_manager.dict()
-        shared_queues = shared_memory_manager.dict()
+# Simple in-memory message passing for Windows compatibility
+# Instead of shared memory manager which has pickling issues
+_global_message_queues = {}
+_global_lock = threading.Lock()
 
 class MessageType(Enum):
     REQUEST = "REQUEST"
@@ -65,10 +56,9 @@ class BaseAgent(ABC):
         self.agent_id = agent_id
         self.max_workers = max_workers
         self.is_running = False
-        self.message_queue = queue.PriorityQueue()
+        self.message_queue = queue.Queue()  # Use simple Queue instead of PriorityQueue for now
         self.response_handlers = {}
         self.thread_pool = ThreadPoolExecutor(max_workers=max_workers)
-        self.process_pool = ProcessPoolExecutor(max_workers=max_workers)
         
         # Performance monitoring
         self.start_time = time.time()
@@ -79,11 +69,9 @@ class BaseAgent(ABC):
         self.cache_dir = Path(f"cache/{agent_id}")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         
-        # Initialize shared memory if needed
-        _initialize_shared_memory()
-        
-        # Register agent in shared memory
-        shared_queues[agent_id] = self.message_queue
+        # Register agent in global message queues (Windows-compatible)
+        with _global_lock:
+            _global_message_queues[agent_id] = self.message_queue
         
         logging.info(f"Agent {agent_id} initialized with {max_workers} workers")
     
@@ -106,19 +94,18 @@ class BaseAgent(ABC):
         # Wait for current tasks to complete
         await self.on_stop()
         
-        # Shutdown thread pools
+        # Shutdown thread pool
         self.thread_pool.shutdown(wait=True)
-        self.process_pool.shutdown(wait=True)
         
         logging.info(f"Agent {self.agent_id} stopped")
     
     async def _message_processing_loop(self):
-        """Main message processing loop with priority handling"""
+        """Main message processing loop"""
         while self.is_running:
             try:
                 # Non-blocking queue check
                 try:
-                    priority, message = self.message_queue.get_nowait()
+                    message = self.message_queue.get_nowait()
                     await self._process_message(message)
                 except queue.Empty:
                     await asyncio.sleep(0.01)  # Minimal sleep to prevent busy waiting
@@ -160,12 +147,11 @@ class BaseAgent(ABC):
     
     async def send_message(self, message: AgentMessage):
         """Send message to another agent efficiently"""
-        _initialize_shared_memory()
-        if shared_queues and message.receiver in shared_queues:
-            priority_value = message.priority.value
-            shared_queues[message.receiver].put((priority_value, message))
-        else:
-            logging.warning(f"Agent {message.receiver} not found")
+        with _global_lock:
+            if message.receiver in _global_message_queues:
+                _global_message_queues[message.receiver].put(message)
+            else:
+                logging.warning(f"Agent {message.receiver} not found")
     
     def get_performance_metrics(self) -> Dict[str, Any]:
         """Get agent performance metrics"""
@@ -181,18 +167,28 @@ class BaseAgent(ABC):
         }
     
     def cache_large_data(self, key: str, data: Any) -> Path:
-        """Cache large data using memory-mapped files"""
+        """Cache large data using JSON serialization"""
         cache_path = self.cache_dir / f"{key}.cache"
-        with open(cache_path, 'wb') as f:
-            pickle.dump(data, f)
+        try:
+            with open(cache_path, 'w') as f:
+                json.dump(data, f, indent=2)
+        except (TypeError, ValueError):
+            # Fallback to string representation for non-serializable data
+            with open(cache_path, 'w') as f:
+                f.write(str(data))
         return cache_path
     
     def load_cached_data(self, key: str) -> Optional[Any]:
-        """Load cached data from memory-mapped file"""
+        """Load cached data from JSON file"""
         cache_path = self.cache_dir / f"{key}.cache"
         if cache_path.exists():
-            with open(cache_path, 'rb') as f:
-                return pickle.load(f)
+            try:
+                with open(cache_path, 'r') as f:
+                    return json.load(f)
+            except (json.JSONDecodeError, ValueError):
+                # Fallback to reading as string
+                with open(cache_path, 'r') as f:
+                    return f.read()
         return None
     
     # Abstract methods for agent-specific implementation
