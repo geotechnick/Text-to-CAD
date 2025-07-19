@@ -6,6 +6,8 @@ Optimized for maximum computational efficiency
 import asyncio
 import logging
 import time
+import argparse
+import json
 from typing import List, Dict, Any
 from pathlib import Path
 
@@ -209,40 +211,192 @@ def get_system() -> TextToCADSystem:
         _system_instance = TextToCADSystem()
     return _system_instance
 
+def parse_arguments():
+    """Parse command line arguments"""
+    parser = argparse.ArgumentParser(description="Text-to-CAD Multi-Agent System")
+    
+    # Main operation modes
+    parser.add_argument("--prompt", type=str, help="Engineering prompt to process")
+    parser.add_argument("--files", type=str, nargs="*", help="Engineering files to analyze")
+    parser.add_argument("--batch", type=str, help="JSON file with batch prompts")
+    parser.add_argument("--output-dir", type=str, default="output", help="Output directory")
+    parser.add_argument("--status", action="store_true", help="Get system status")
+    parser.add_argument("--monitor", action="store_true", help="Monitor system performance")
+    parser.add_argument("--duration", type=int, default=60, help="Monitoring duration in seconds")
+    
+    # System configuration
+    parser.add_argument("--config", type=str, help="Configuration file path")
+    parser.add_argument("--log-level", type=str, default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR"])
+    parser.add_argument("--workers", type=int, default=4, help="Number of worker threads")
+    
+    return parser.parse_args()
+
+async def process_single_prompt(system: TextToCADSystem, prompt: str, files: List[str], output_dir: str):
+    """Process a single prompt and save results"""
+    
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    
+    logging.info(f"Processing prompt: {prompt[:100]}...")
+    if files:
+        logging.info(f"Using files: {files}")
+    
+    try:
+        result = await system.process_prompt(prompt, files or [])
+        
+        # Save IFC content
+        timestamp = int(time.time())
+        ifc_filename = f"generated_model_{timestamp}.ifc"
+        ifc_path = output_path / ifc_filename
+        
+        with open(ifc_path, "w") as f:
+            f.write(result.get("ifc_content", ""))
+        
+        # Save metadata
+        metadata_filename = f"metadata_{timestamp}.json"
+        metadata_path = output_path / metadata_filename
+        
+        metadata = {
+            "prompt": prompt,
+            "files": files or [],
+            "processing_time": result.get("processing_time", 0),
+            "element_count": result.get("element_count", 0),
+            "workflow_id": result.get("workflow_id", ""),
+            "timestamp": timestamp
+        }
+        
+        with open(metadata_path, "w") as f:
+            json.dump(metadata, f, indent=2)
+        
+        logging.info(f"✅ Generated IFC model: {ifc_path}")
+        logging.info(f"📊 Elements: {result.get('element_count', 0)}, Time: {result.get('processing_time', 0):.2f}s")
+        
+        return result
+        
+    except Exception as e:
+        logging.error(f"❌ Processing failed: {e}")
+        return None
+
+async def process_batch_prompts(system: TextToCADSystem, batch_file: str, output_dir: str):
+    """Process batch prompts from JSON file"""
+    
+    try:
+        with open(batch_file, "r") as f:
+            batch_data = json.load(f)
+        
+        prompts = batch_data.get("prompts", [])
+        logging.info(f"Processing {len(prompts)} prompts from batch file")
+        
+        results = []
+        for i, prompt_data in enumerate(prompts):
+            logging.info(f"Processing batch item {i+1}/{len(prompts)}")
+            
+            prompt = prompt_data.get("prompt", "")
+            files = prompt_data.get("files", [])
+            
+            result = await process_single_prompt(system, prompt, files, output_dir)
+            results.append(result)
+        
+        # Save batch results
+        batch_results_path = Path(output_dir) / "batch_results.json"
+        with open(batch_results_path, "w") as f:
+            json.dump(results, f, indent=2)
+        
+        logging.info(f"📋 Batch processing complete: {batch_results_path}")
+        
+    except Exception as e:
+        logging.error(f"❌ Batch processing failed: {e}")
+
+async def monitor_system(system: TextToCADSystem, duration: int):
+    """Monitor system performance"""
+    
+    logging.info(f"🔍 Monitoring system for {duration} seconds...")
+    
+    start_time = time.time()
+    while time.time() - start_time < duration:
+        try:
+            status = await system.get_system_status()
+            
+            # Log key metrics
+            uptime = status.get("uptime", 0)
+            agent_count = len(status.get("agents", {}))
+            total_messages = status.get("system_metrics", {}).get("total_messages", 0)
+            
+            logging.info(f"📊 Uptime: {uptime:.1f}s, Agents: {agent_count}, Messages: {total_messages}")
+            
+            # Check for performance issues
+            suggestions = status.get("performance_analysis", [])
+            if suggestions:
+                logging.warning(f"⚠️  Performance suggestions: {suggestions}")
+            
+            await asyncio.sleep(10)  # Check every 10 seconds
+            
+        except Exception as e:
+            logging.error(f"Monitoring error: {e}")
+            await asyncio.sleep(5)
+
 async def main():
     """Main function for running the system"""
+    
+    args = parse_arguments()
+    
+    # Configure logging
+    logging.getLogger().setLevel(getattr(logging, args.log_level))
     
     system = get_system()
     
     try:
         # Initialize system
         await system.initialize()
+        logging.info("🚀 Text-to-CAD Multi-Agent System initialized")
         
-        # Example usage
-        logging.info("System ready for processing")
-        
-        # Process example prompt
-        result = await system.process_prompt(
-            "Design a reinforced concrete floodwall 4.2m high and 100m long with micropile foundation",
-            ["engineering files/Floodwall Bearing 101+50 to 106+00.xlsx"]
-        )
-        
-        logging.info(f"Processing result: {result}")
-        
-        # Get system status
-        status = await system.get_system_status()
-        logging.info(f"System status: {status}")
-        
-        # Keep system running
-        while True:
-            await asyncio.sleep(1)
+        if args.status:
+            # Get and display system status
+            status = await system.get_system_status()
+            print(json.dumps(status, indent=2))
             
+        elif args.monitor:
+            # Monitor system performance
+            await monitor_system(system, args.duration)
+            
+        elif args.batch:
+            # Process batch prompts
+            await process_batch_prompts(system, args.batch, args.output_dir)
+            
+        elif args.prompt:
+            # Process single prompt
+            await process_single_prompt(system, args.prompt, args.files, args.output_dir)
+            
+        else:
+            # Interactive mode - keep system running
+            logging.info("🎯 System ready for interactive use")
+            logging.info("Press Ctrl+C to shutdown")
+            
+            # Example usage
+            result = await system.process_prompt(
+                "Design a reinforced concrete floodwall 4.2m high and 100m long with micropile foundation",
+                ["engineering files/Floodwall Bearing 101+50 to 106+00.xlsx"]
+            )
+            
+            logging.info(f"📋 Example processing result: {result}")
+            
+            # Keep system running
+            while True:
+                await asyncio.sleep(1)
+                
     except KeyboardInterrupt:
-        logging.info("Shutdown requested")
+        logging.info("🛑 Shutdown requested")
     except Exception as e:
-        logging.error(f"System error: {e}")
+        logging.error(f"❌ System error: {e}")
+        import traceback
+        traceback.print_exc()
     finally:
         await system.shutdown()
+        logging.info("👋 System shutdown complete")
 
 if __name__ == "__main__":
+    # Fix Windows multiprocessing issues
+    import multiprocessing as mp
+    mp.freeze_support()
+    
     asyncio.run(main())

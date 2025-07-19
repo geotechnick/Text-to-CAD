@@ -19,10 +19,18 @@ import mmap
 import pickle
 from pathlib import Path
 
-# Shared memory for cross-agent communication
-shared_memory_manager = mp.Manager()
-shared_data = shared_memory_manager.dict()
-shared_queues = shared_memory_manager.dict()
+# Shared memory for cross-agent communication - Initialize lazily to avoid Windows issues
+shared_memory_manager = None
+shared_data = None
+shared_queues = None
+
+def _initialize_shared_memory():
+    """Initialize shared memory components safely"""
+    global shared_memory_manager, shared_data, shared_queues
+    if shared_memory_manager is None:
+        shared_memory_manager = mp.Manager()
+        shared_data = shared_memory_manager.dict()
+        shared_queues = shared_memory_manager.dict()
 
 class MessageType(Enum):
     REQUEST = "REQUEST"
@@ -70,6 +78,9 @@ class BaseAgent(ABC):
         # Memory-mapped cache for large data
         self.cache_dir = Path(f"cache/{agent_id}")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Initialize shared memory if needed
+        _initialize_shared_memory()
         
         # Register agent in shared memory
         shared_queues[agent_id] = self.message_queue
@@ -149,7 +160,8 @@ class BaseAgent(ABC):
     
     async def send_message(self, message: AgentMessage):
         """Send message to another agent efficiently"""
-        if message.receiver in shared_queues:
+        _initialize_shared_memory()
+        if shared_queues and message.receiver in shared_queues:
             priority_value = message.priority.value
             shared_queues[message.receiver].put((priority_value, message))
         else:
